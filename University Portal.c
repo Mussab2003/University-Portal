@@ -14,7 +14,7 @@ void gotoxy (int column, int line){
         SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
     }
 void display_screen(); //for styling of front page
-void display_screen2();  //for styling of all pages after front page  
+void display_screen2();  //for styling of all pages except front page  
 void main_page();  //front page
 void admin();   //admin portal
 void admin_password();  //for password of admin portal
@@ -35,7 +35,7 @@ int main(){
 	main_page();
     }
 
-void main_page(){
+void main_page(){                          //front page
 	char user_choice;
 	system("CLS");
 	system("COLOR F3"); //to change the font colour
@@ -48,20 +48,19 @@ void main_page(){
 	printf("Press A for Admin Portal\n");
 	gotoxy(22,15);
 	printf("Select choice: ");
-	gotoxy(36,15);
 	scanf("%c", &user_choice);
 	system("CLS");
 	
 	switch(user_choice){
-		case 'A':
-		case 'a':
+		case 'A':                         //Admin Portal
+		case 'a':                         //Admin Portal
 		     admin_password();
 			 break;	
 		
 	}    
 }
 
-void display_screen(){
+void display_screen(){                    //for styling of front page
 	int col=20,row=5,i;
 	for(i=5;i<=20;i++){ 
 		gotoxy(20,i);
@@ -102,7 +101,7 @@ void display_screen(){
 	}
 }
 
-void display_screen2(){
+void display_screen2(){                         //for styling of all pages except front page
 	int col=20,row=5,i;
 	for(i=5;i<=20;i++){ 
 		gotoxy(20,i);
@@ -131,18 +130,18 @@ void display_screen2(){
 	
 	gotoxy(21,7);
 	printf("\t\t  ");
-	char d[40]="Welcome to UNIVERSITY PORTAL ";
+	char d[40]="Welcome to University Portal ";
 	for(i=0;i<40;i++){
 		printf("%c",d[i]);
 	}
 }
-void admin_password(){
+void admin_password(){                        //for password in admin portal
 	display_screen2();
     int pass = 12345;
     int admin_pass, i, attempt = 3;
     for (i = 1; i <= 3; i++){
-    	gotoxy(22,15);
-        printf("Enter password: ");
+    	gotoxy(22,11);
+        printf("Enter Password: ");
         scanf("%d", &admin_pass);
         attempt--;
         if (admin_pass != pass && attempt >= 1){
@@ -172,7 +171,7 @@ void admin_password(){
         }
     }
 }
-void admin(){
+void admin(){                                 //Admin Portal
 	display_screen2();
     int admin_choice;
     gotoxy(22,10);
@@ -184,99 +183,103 @@ void admin(){
 	gotoxy(22,14);
 	printf("Press 3 for Course Management");
 	gotoxy(22,15);
-	printf("Press 4 to go to the Previous Menu");
+	printf("Press 4 to Exit");
     gotoxy(22,16);
-	printf("Press 5 to Exit");
-    gotoxy(22,18);
 	printf("Enter choice: ");
     scanf("%d", &admin_choice);
     system("CLS");
     switch (admin_choice)
     {
-    case 1:   
-    	admin_teacher_management();
+    case 1:                                    //Teacher Management in Admin Portal
+    	admin_teacher_management();           
         break;
         
     case 2:
-    	admin_student_management();
+    	admin_student_management();            //Student Management in Admin Portal
         break;
 
 	case 3:
-	    admin_course_management();	
+	    admin_course_management();	           //Course Management in Admin Portal
         break;
 	 
-	 case 4:
-	 	main_page();
-	 	break;
-	 
-	 case 5:
-	    break; 
-	 }
+	case 4:
+	    break;                                 //To Exit
+	}
 }
 
-void admin_teacher_management(){
+void admin_teacher_management(){               //teacher management in admin portal
     display_screen2();
 	int admin_choice_teacher;
     gotoxy(22,10);
     printf("Welcome to Teacher Management");
     gotoxy(22,12);
-    printf("Press 1 for Updating or showing Teacher's information");
+    printf("Press 1 for Updating or Showing Teacher's Information");
     gotoxy(22,13);
-    printf("Press 2 for Deleting Teacher's information");
+    printf("Press 2 for Deleting Teacher's Information");
     gotoxy(22,14);
     printf("Press 3 for Teacher's Class Shedule");
     gotoxy(22,15);
-    printf("Press 4 for Teacher's salary management");
+    printf("Press 4 for Teacher's Salary Management");
     gotoxy(22,16);
     printf("Press 5 to go to the Previous Menu");
-    gotoxy(22,19);
-	printf("Enter choice: ");
+    gotoxy(22,17);
+    printf("Press 6 to Exit");
+	gotoxy(22,20);
+	printf("Enter Choice: ");
     scanf("%d", &admin_choice_teacher);
     system("CLS");
     switch(admin_choice_teacher){
-          case 1:
-               admin_teacher_information_management();
-               break;
-          
-		  case 5:
-		       admin(); 
+        case 1:                                   //To add and review teacher's information
+            admin_teacher_information_management();
+            break;
+            
+        case 2:                                  //To remove teacher's information
+        	admin_teacher_information_remove();
+        	break;
+          	   
+		case 5:                                 //To go to the previous menu
+		    admin();
+		    break;
+			
+		case 6:                                  //To  Exit
+            break;		 
 	}
 } 
 
 
-void admin_teacher_information_management(){   
+void admin_teacher_information_management(){              //teacher info add and review in admin portal
     display_screen2();
     int admin_choice_teacher_info;
  	gotoxy(22,11);
     printf("Press 1 for reviewing information");
     gotoxy(22,12);
  	printf("Press 2 for adding new information");
-    gotoxy(22,14);
+    gotoxy(22,13);
     printf("Press 3 to go to the previous menu");
-    gotoxy(22,15);
+    gotoxy(22,14);
     printf("Press 4 to exit");
-    gotoxy(22,18);
+    gotoxy(22,17);
  	printf("Enter choice: ");
     scanf("%d", &admin_choice_teacher_info);
     system("CLS");
     switch(admin_choice_teacher_info){
-          case 1:
-      	       teacher_info_read();
-      	       break;
+        case 1:                                         //to review teacher's information in admin portal
+      	    teacher_info_read();  
+      	    break;
       	   
-          case 2:
-      	       teacher_info_add();
-               break;
+        case 2:                                        //to add teacher's information in admin portal
+      	    teacher_info_add();
+            break;
                
-          case 3:
-		       admin_teacher_management();
+        case 3:
+		    admin_teacher_management();                //to go to the previous menu
 		  	   
-		  case 4:
-		       break; 
+		case 4:                                        //to exit
+		    break; 
     }
 }
 
-void teacher_info_add(){
+void teacher_info_add(){                               //function to add teacher info in admin portal
 	display_screen2();
 	int i;
 	struct teacher_info_add{
@@ -298,7 +301,7 @@ void teacher_info_add(){
     fflush(stdin);
 	gets(t1.name);
 	
-	fprintf(fp, "Teacher's Name: %s\n", t1.name);
+	fprintf(fp, "\nTeacher's Name: %s\n", t1.name);
 	
 	gotoxy(22,11);
 	printf("Enter number of courses: ");
@@ -345,7 +348,7 @@ void teacher_info_add(){
 	}
 }
 
-void teacher_info_read(){
+void teacher_info_read(){                             //function to review teacher's information in admin portal
 	display_screen2();
 	char data[size], name2[size];
     char name1[size] = {"Teacher's Name: "};
@@ -387,7 +390,79 @@ void teacher_info_read(){
 	}
 }
 
-void admin_student_management(){
+void admin_teacher_information_remove(){                        //function to remove teacher's information in admin portal
+	display_screen2();
+	char erasedata[6][size];
+	char stdata[size], entername[size];
+    char namesearch[size] = {"Teacher's Name: "};
+	int i;
+	stdata[size] = (char *)malloc(size * sizeof(char));
+	
+	FILE *fp;
+    
+	fp = fopen("teacher_info_add.txt", "r");
+	
+	if(fp == NULL){
+		printf("File not found");
+	}
+	
+	gotoxy(22,10);
+	printf("Enter teacher name to delete record: ");
+	gets(entername);
+	
+	strcat(namesearch, entername);
+	strcat(namesearch, "\n");
+	
+	while(fgets(stdata, size, fp)){
+		if(strcmp(namesearch, stdata)==0){
+			strcpy(erasedata[0],namesearch);
+		for(i=1;fgets(stdata, size, fp) && stdata[0] != '\n' && i<=5;i++){
+				strcpy(erasedata[i],stdata);	
+			}
+	    }
+	}
+	fclose(fp);
+	
+  char buffer[size];
+  
+  FILE *file, *temp;
+
+  file = fopen("teacher_info_add.txt", "r");
+  temp = fopen("tempnew_teacher.txt", "w");
+
+  if (file == NULL || temp == NULL)
+  {
+    printf("Error opening file(s).\n");
+    return 1;
+  }
+
+  bool keep_reading = true;
+  int j=0;
+  do {
+
+      
+    fgets(buffer, size, file);
+
+   
+    if (feof(file)) keep_reading = false;
+    else if (strcmp(buffer, erasedata[j]) != 0)
+      fputs(buffer, temp);
+    else if (strcmp(buffer, erasedata[j]) == 0)
+        j++;
+
+  } while (keep_reading);
+  
+
+
+  fclose(file);
+  fclose(temp);
+
+ 
+  remove("teacher_info_add.txt");
+  rename("tempnew_teacher.txt","teacher_info_add.txt");
+}
+
+void admin_student_management(){                                            //student management in admin portal
 	display_screen2();
     int admin_choice_student;
 	gotoxy(22,10);
@@ -397,25 +472,37 @@ void admin_student_management(){
     gotoxy(22,13);
     printf("Press 2 for Deleting Student's information\n");
     gotoxy(22,14);
-    printf("Press 3 for Student's Class Shedule\n");
+    printf("Press 3 for Student's Class Shedule");
     gotoxy(22,15);
-    printf("Press 4 for Student's fees management\n");
-    gotoxy(22,17);
+    printf("Press 4 for Student's fees management");
+    gotoxy(22,16);
+    printf("Press 5 to go to the previous menu");
+	gotoxy(22,17);
+	printf("Press 6 to exit");
+	gotoxy(22,19);
     printf("Enter choice: ");
     scanf("%d", &admin_choice_student);
     system("CLS");
     switch(admin_choice_student){
-        case 1:
+        case 1:                                                           //to add or review student information
             admin_student_information_management();
             break;
         
 		case 2:
-		    admin_student_information_remove();    
-	      
+		    admin_student_information_remove();                          //to remove student information
+	        break;
+	        
+	    case 5:
+	    	admin();                                                    //to go to the previous menu
+	    	break;
+	
+	    case 6:                                                         //to exit
+	    	break;  
 	}
+	
 }
 
-void admin_student_information_management(){   
+void admin_student_information_management(){                           //student info add and review in admin portal  
 	display_screen2();
 	int admin_choice_student_info;
 	gotoxy(22,10);
@@ -431,25 +518,25 @@ void admin_student_information_management(){
     scanf("%d", &admin_choice_student_info);
     system("CLS");
     switch(admin_choice_student_info){
-	    case 1:
+	    case 1:                                                         //student info review
 	    	student_info_read();
 	    	break;
 	    	
-	    case 2:
+	    case 2:                                                         //student info add
 	    	student_info_add();
 	    	break;
 		       
-	    case 3:
-	    	admin_student_management();
+	    case 3:                                                         //to go to previous menu
+	    	admin_student_management();                              
 	    	break;
 	    	
-	    case 4:
+	    case 4:                                                          //to exit
 	    	break;
 	}
 	
 }
 
-void student_info_add(){
+void student_info_add(){                             //function to add student's information
 	display_screen2();
     struct student_information{
 	char name[50];
@@ -519,11 +606,11 @@ void student_info_add(){
     scanf("%d", &adminChoice);
     system("CLS");
     switch(adminChoice){
-    	case 1:
+    	case 1:                               //to go to the previous menu
     		admin_student_information_management();
     		break;
     	
-    	case 2:
+    	case 2:                                //to exit
     		break;
 	}
 }
@@ -569,7 +656,8 @@ void student_info_read(){
 	}
 }
 
-void admin_student_information_remove(){
+void admin_student_information_remove(){        //to remove student's information
+	display_screen2();
 	char erasedata[6][size];
 	char stdata[size], entername[size];
     char namesearch[size] = {"Student's Name: "};
@@ -584,7 +672,9 @@ void admin_student_information_remove(){
 		printf("File not found");
 	}
 	
+	gotoxy(22,10);
 	printf("Enter student name to delete record: ");
+	fflush(stdin);
 	gets(entername);
 	
 	strcat(namesearch, entername);
@@ -639,7 +729,7 @@ void admin_student_information_remove(){
   rename("tempnew.txt","student_info_add.txt");
 }
 
-void admin_course_management(){
+void admin_course_management(){           //course management in admin portal
 	display_screen2();
 	int admin_choice_course;
 	gotoxy(22,10);
@@ -662,7 +752,7 @@ void admin_course_management(){
 	}
 }
 
-void admin_course_add(){
+void admin_course_add(){                              //to add course in admin portal
 	int max_size = 1000;
 	char buffer[max_size]; 
 	FILE *course_check;
@@ -710,7 +800,7 @@ void admin_course_add(){
     fclose(course_check);
 }
 
-void admin_course_read(){
+void admin_course_read(){                //to read all the course
 	display_screen2();
 	FILE *fp;
 	fp = fopen("Course_Data.txt", "r");
