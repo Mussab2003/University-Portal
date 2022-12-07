@@ -32,15 +32,18 @@ void admin_course_management(); //course management in admin portal
 void admin_course_add();//to add a new course
 void admin_course_read();//to read all the course
 void teacher();
+void teacher_pass();
+void timetable_review();
+void rev_attendance();
+void add_attendance();
+void add_marking();
+void rev_marking();
+float GetGPA(float total);
 void student();
 
 int main(){
-	main_page();
-//    admin_password();
-	}
-
-void main_page(){                          //front page
-	char user_choice;
+//	admin_password();
+    int  user_choice;
 	system("CLS");
 	system("COLOR F3"); //to change the font colour
 	display_screen();
@@ -52,20 +55,21 @@ void main_page(){                          //front page
 	printf("Press A for Admin Portal\n");
 	gotoxy(22,15);
 	printf("Select choice: ");
-	scanf("%c", &user_choice);
+	scanf(" %c", &user_choice);
+	fflush(stdin);
 	system("CLS");
 	
 	switch(user_choice){
 		case 'A':                         //Admin Portal
 		case 'a':                         //Admin Portal
-		    admin();
+		    admin_password();
 			break;	
 		
 	    case 'T':
 	    case 't':
-	    	teacher();
+	    	teacher_pass();
 	    	break;
-	}    
+	}
 }
 
 void display_screen(){                    //for styling of front page
@@ -144,19 +148,70 @@ void display_screen2(){                         //for styling of all pages excep
 	}
 }
 
-void admin_password(){                        //for password in admin portal
-	display_screen2();
-    char pass[5] = {"admin"};
-    char password[10];
-    gotoxy(22, 12);
-	printf("Enter password: ");
-	gets(password);
-//	printf("%s", password);
-	printf("%d", strcmp(pass, password));
-	if(strcmp(pass, password)==0){
-		printf("Correct Password");
-	}
-
+void admin_password(){
+	system("CLS");
+	fflush(stdin);
+    display_screen2();
+    int i=0;
+	char password[10];
+	char ch;
+	char pass[6] = "admin";
+	gotoxy(22,12);
+    printf("Enter Password: ");
+    fflush(stdin);
+	while(1){
+		fflush(stdin);
+		ch = getch();
+		fflush(stdin);
+		
+		if(ch == 13){
+			fflush(stdin);
+			password[i] = '\0';
+			break;
+		}
+		else if(ch == 8){
+			if(i>0){
+				i--;
+				fflush(stdin);
+				printf("\b \b");
+			}
+		}
+		else{
+			fflush(stdin);
+			password[i++] = ch;
+			printf("* \b");
+		}
+		
+	 }
+	 
+	 if(strcmp(password, pass)==0){
+	 	gotoxy(22,14);
+	 	printf("Password is correct\n");
+	 	system("CLS");
+	 	admin();
+	 }
+	 
+	 else if(strcmp(password, pass)!=0){
+	 	int choice;
+	 	gotoxy(22,14);
+	    printf("Password is incorrect");
+	 	gotoxy(22,15);
+		printf("Press 1 to try again");
+	 	gotoxy(22,16);
+		printf("Press 2 to exit");
+	 	gotoxy(22,18);
+		printf("Enter choice: ");
+		scanf("%d", &choice);
+		switch(choice){
+			case 1:
+				system("CLS");
+				admin_password();
+				break;
+			
+			case 2:
+				break;
+		}	
+	 }
 }
 
 void admin(){                                 //Admin Portal
@@ -273,6 +328,7 @@ void teacher_info_add(){                               //function to add teacher
 		  int course_quantity;
 		  char course_name[50];
 		  int salary;
+		  char pass[50];
 	}t1;
 	
 	FILE *fp;
@@ -310,7 +366,13 @@ void teacher_info_add(){                               //function to add teacher
 	scanf("%d", &t1.salary);
 	fflush(stdin);
 	fprintf(fp, "Salary: %d\n", t1.salary);
-
+    
+    gotoxy(22, ++y);
+    printf("Enter password: ");
+    fflush(stdin);
+	gets(t1.pass);
+    fprintf(fp, "Password: %s\n", t1.pass);
+    
     fclose(fp);
     system("CLS");
     display_screen2();
@@ -344,7 +406,7 @@ void teacher_info_read(){                             //function to review teach
 	char stdata[size], entername[size];
     char namesearch[size] = {"Teacher's Name: "};
 	
-	stdata[size] = (char *)malloc(size * sizeof(char));
+//	stdata[size] = (char *)malloc(size * sizeof(char));
 	
 	FILE *fp;
     
@@ -410,7 +472,7 @@ void admin_teacher_information_remove(){                        //function to re
 	char stdata[size], entername[size];
     char namesearch[size] = {"Teacher's Name: "};
 	int i;
-	stdata[size] = (char *)malloc(size * sizeof(char));
+//	stdata[size] = (char *)malloc(size * sizeof(char));
 	
 	FILE *fp;
     
@@ -448,7 +510,7 @@ void admin_teacher_information_remove(){                        //function to re
   if (file == NULL || temp == NULL)
   {
     printf("Error opening file(s).\n");
-    return 1;
+//    return 1;
   }
 
   bool keep_reading = true;
@@ -675,7 +737,7 @@ void student_info_read(){
 	char stdata[size], entername[size];
     char namesearch[size] = {"ID: "};
 	
-	stdata[size] = (char *)malloc(size * sizeof(char));
+//	stdata[size] = (char *)malloc(size * sizeof(char));
 	
 	FILE *fp;
     
@@ -968,22 +1030,335 @@ void admin_course_read(){                //to read all the new courses
 	}
 }
 
-void teacher(){
+void teacher_pass(){
 	display_screen2();
-	int teacher_choice;
-	gotoxy(22,10);
-	printf("Welcome to Teacher's Portal...");
-	gotoxy(22,11);
-	printf("Press 1 for Attendence Management");
-	gotoxy(22,12);
-	printf("Press 2 for Marks Management");
-	gotoxy(22,13);
-	printf("Press 3 to see Class Schedule");
-	gotoxy(22,15);
-	printf("Select choice: ");
-	scanf("%d", teacher_choice);
-	switch(teacher_choice){
-		//case 1:
+	FILE *fp;
+	char data[size];
+	char tname[size];
+	char tpass[size];
+	char pass_t[size]={"Password: "};
+	char name_t[size]={"Teacher's Name: "};
+	fp= fopen("teacher_info_add.txt","r");
+	gotoxy(22, 12);
+	printf("Enter your name: ");
+	gets(tname);
+	strcat(name_t,tname);
+	strcat(name_t, "\n");
+	while(fgets(data, size, fp)!= NULL){
+		if((strcmp(name_t,data))==0){
+			gotoxy(22, 13);
+			printf("Enter password: ");
+			gets(tpass);
+	        strcat(pass_t,tpass);
+	        strcat(pass_t, "\n");
+			while(fgets(data, size, fp) && data[0] != '\n'){
+				if(strcmp(pass_t,data)==0)
+				    teacher();
+			}
+	    }
+}
+fclose(fp);
+}
+
+void teacher(){
+	system("CLS");
+	display_screen2();
+   int choice,mark_choice, att_choice ;
+   gotoxy(22, 11);
+   printf("Press 1 for marking management");
+   gotoxy(22, 12);
+   printf("Press 2 for attendance management");
+   gotoxy(22, 13);
+   printf("Press 3 for timetable review");
+   gotoxy(22, 15);
+   printf("Enter Choice: ");
+   scanf("%d",&choice);
+   switch(choice)
+      {
+      	case 1:
+      		system("CLS");
+      		display_screen2();
+      		gotoxy(22, 11);
+      		printf("Press 1 to add marking");
+			gotoxy(22, 12);
+			printf("Press 2 to review marking");
+      		gotoxy(22, 14);
+      		printf("Enter choice: ");
+			scanf("%d",&mark_choice);
+      		switch(mark_choice)
+      		{
+      			case 1:
+      				add_marking();
+      				break;
+      			case 2:
+      				rev_marking();
+      				break;
+			  }
+		break;
+		
+		case 2:
+			system("CLS");
+			display_screen2();
+			gotoxy(22, 11);
+			printf("Press 1 to add attendance");
+			gotoxy(22, 12);
+			printf("Press 2 to review attendance");
+			gotoxy(22, 14);
+			printf("Enter Choice: ");
+      		scanf("%d",&att_choice);
+      		switch(att_choice)
+      		{
+      			case 1:
+      				add_attendance();
+      				break;
+      			case 2:
+      				rev_attendance();
+      				break;
+			  }
+		break;
+		
+		case 3:
+             timetable_review();
+        break;
+	  }	
+}
+void add_marking(){
+	system("CLS");
+	display_screen2();
+	char choice3;
+	float asg, quiz, mid1,mid2,final,total,gpa;
+	char data[size];
+	char id[15];
+	char id_c[size]={"ID: "};
+	
+	FILE *fp,*pr;
+	fp= fopen("student_marking.txt","a");
+	pr= fopen("student_info_add.txt","r");
+	
+	gotoxy(22, 11);
+	printf("Enter the student ID to add marks: ");
+	scanf("%s",id);
+	strcat(id_c,id);
+	strcat(id_c, "\n");
+	int y=12;
+	while(fgets(data, size, pr)){
+		if(strcmp(id_c,data)==0){
+			gotoxy(22, y);
+			fprintf(fp,"%s",data);
+		int i;
+		for(i=1;fgets(data, size, pr) && data[0] != '\n' && i<=6;i++){
+				gotoxy(22, y++);
+				fprintf(fp,"%s",data);
+				if(i==1||i==2||i==3||i==4)
+				    printf("%s",data);
+			}
+	    }
+}
+    gotoxy(22, y++);
+    int choice;
+    printf("Press 1 for Adding Marks");
+    gotoxy(22, y++);
+    printf("Press E or e to exit");
+    gotoxy(22, y++);
+    printf("Enter Choice: ");
+    scanf("%d", &choice);
+    switch(choice){
+    	case 1:
+    		system("CLS");
+    		display_screen2();
+            gotoxy(22, 11);
+            printf("Enter Assignments weightage /10: ");
+            scanf("%f",&asg);
+            fprintf(fp,"Assignmnet: %.1f\n",asg);
+            gotoxy(22, 12);
+            printf("Enter quizzes weightage /10: ");
+            scanf("%f",&quiz);
+            fprintf(fp,"Quizzes: %.1f\n",quiz);
+            gotoxy(22, 13);
+			printf("Enter mid 1 weightage /15: ");
+		    scanf("%f",&mid1);
+		    fprintf(fp,"Mid1: %.1f\n",mid1);
+			gotoxy(22, 14);
+			printf("Enter mid 2 weightage /15: ");
+		    scanf("%f",&mid2);
+		    fprintf(fp,"Mid2: %.1f\n",mid2);
+		    fflush(stdin);
+		    gotoxy(22, 15);
+		    printf("Enter Finals weightage /50: ");
+		    scanf("%f",&final);
+		    fprintf(fp,"Final: %.1f\n",final);
+			total= asg+ quiz +mid1+mid2+final;
+		    gpa =GetGPA(total);
+		    gotoxy(22, 16);
+		    printf("Calculated GPA is %.2f",gpa);
+		    fprintf(fp,"GPA: %.2f\n",gpa);
+		    fputs("\n\n",fp);  
+			fclose(pr);				     
+		    fclose(fp);
+		    break;
 			
+		case 'E':
+		case 'e':
+		    break;     		
 	}
+	
+	 		                    
+}
+
+void rev_marking(){
+	system("CLS");
+	display_screen2();
+	char choice3;
+	char id[15];
+	char id_c[size]={"ID: "};
+	char data[size];
+	
+	FILE *fp;
+	fp= fopen("student_marking.txt","r");
+	gotoxy(22, 11);
+	printf("Enter the student ID to review marks: ");
+	scanf("%s",id);
+	strcat(id_c,id);
+	strcat(id_c, "\n");
+	int occur=0;
+	while(fgets(data, size,fp)){
+		if(strcmp(id_c,data)==0){
+		while(fgets(data, size,fp) && data[0] != '\n'){
+				printf("%s",data);
+			}
+			occur++;
+	    }
+}
+if(occur == 0) {
+	    gotoxy(22, 14);
+		printf("Sorry, Student marks are not entered yet.");
+	}
+  fclose(fp);
+}
+
+void add_attendance(){
+	system("CLS");
+	int days;
+	char data[size];
+	char id[15];
+	char id_c[size]={"ID: "};
+	
+	FILE *fp,*pr;
+	fp= fopen("student_attendance.txt","a");
+	pr= fopen("student_marking.txt","r");
+	gotoxy(22, 11);
+	printf("Enter the student ID to mark Attendace: ");
+	scanf("%s",id);
+	strcat(id_c,id);
+	strcat(id_c, "\n");
+	int y=12;
+	while(fgets(data, size, pr)){
+		if(strcmp(id_c,data)==0){
+			gotoxy(22, y);
+			fprintf(fp,"%s",data);	
+		int i;
+		for(i=1;fgets(data, size, pr) && data[0] != '\n' && i<=12;i++){
+				gotoxy(22, y++);
+				fprintf(fp,"%s",data);
+				if(i==1|| i==2 || i==3 || i==4)
+				    gotoxy(22, y++);
+					printf("%s",data);
+			}
+	    }
+}   printf("\nEnter the total no. days attended by student /90");
+    scanf("%d",&days);
+    int percent= (days/90.0)*100.0;
+    fprintf(fp,"Attendance Percentage: %d %",percent);
+    printf("Attendance added Successfully\n");
+    printf("\nAttendance Percentage calculated to be: %d %",percent);
+    fputs("\n\n",fp);
+    fclose(fp);
+    fclose(pr);
+}
+
+void timetable_review(void)
+{
+	int time_choice;
+	char buffer[1000];
+	FILE *fp;
+		printf("\t\t\tWELCOME TO TIMETABLE REVIEW\t\t\t");
+	        printf("\n\nSelect a Day to showcase its timetable\n\nPress\n1 for Monday\n2 for Tuesday\n3 for Wednesday\n4 for Thursday\n5 for Friday\n");
+	        scanf("%d", &time_choice);
+	        switch(time_choice)
+	        {
+		    case 1:
+			   fp= fopen("Monday.txt","r");
+			break;
+		    case 2:
+			   fp= fopen("Tuesday.txt","r");
+			break;
+		    case 3:
+			   fp= fopen("Wednesday.txt","r");
+			break;
+		    case 4:
+			   fp= fopen("Thursday.txt","r");
+			break;
+		    case 5:
+			   fp= fopen("Friday.txt","r");
+			break;
+         	}
+          while(fgets(buffer,1000,fp))
+              {
+              	printf("%s",buffer);
+            	}
+}
+
+void rev_attendance(void)
+{
+	char data[size];
+	FILE *fp;
+	fp= fopen("student_attendance.txt","r");
+	char id[15];
+	char id_c[size]={"ID: "};
+	printf("Enter the student ID to review attendance\t");
+	scanf("%s",id);
+	strcat(id_c,id);
+	strcat(id_c, "\n");
+	while(fgets(data, size, fp)){
+		if(strcmp(id_c,data)==0){
+		int i;
+		for(i=1;fgets(data, size, fp) && data[0] != '\n' && i<=11;i++){
+				if(i==1|| i==2 || i==3 || i==4 || i==11)
+				    printf("%s",data);
+			}
+	    }
+} 
+   fclose(fp);
+	
+}
+
+
+
+
+float GetGPA(float total)
+{
+	if (total>=86 && total<=100 )
+        return(4);
+    else if(total>=82 && total<=85 )
+        return(3.67);
+    else if(total>=78 && total<=81)
+        return(3.33);
+    else if(total>=74 && total<=77)
+        return(3);
+    else if(total>=70 && total<=73)
+        return(2.67);
+    else if(total>=66 && total<=69)
+        return(2.33);
+    else if(total>=62 && total<=65)
+        return(2);
+    else if(total>=58 && total<=61)
+        return(1.67);
+    else if(total>=54 && total<=57)
+        return(1.33);
+    else if(total>=50 && total<=53)
+        return(1);
+    else if(total>0 && total<49)
+        return(0);
+    else
+       printf("Wrong weightage input, out of 0-100 range");
 }
