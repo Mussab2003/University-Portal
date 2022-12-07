@@ -845,9 +845,9 @@ void admin_course_add(){                               //to add course in admin 
 	display_screen2();
 	int max_size = 1000;
 	char buffer[max_size]; 
-	FILE *course_check;
-	course_check = fopen("Course_ Data.txt", "r");
-	if(course_check == NULL){
+	FILE *fp, *fp2;
+	fp = fopen("Course_ Data.txt", "r");
+	if(fp == NULL){
 		gotoxy(22, 10);
 		printf("File not found");
 	}
@@ -855,62 +855,98 @@ void admin_course_add(){                               //to add course in admin 
 	struct add_course{
 	       char course_name[20];
 	       int credit_hours;
-	       int semester;   
-	       int course_department;
-	       char department[20];
 	}c1;
 	int a=0;
 	do{
 	fflush(stdin);
-	gotoxy(22, 11);
+	gotoxy(22, 13);
 	printf("Enter course name: ");
 	gets(c1.course_name);
 	strcat(c1.course_name, "\n");
-    while(fgets(buffer, max_size, course_check)){
+    while(fgets(buffer, max_size, fp)){
     	if(strcmp(c1.course_name,buffer)==0){
     		system("CLS");
-    		gotoxy(22, 13);
+    		display_screen2();
+    		gotoxy(22, 10);
 			printf("Course already exist. Please enter any other name.");
     		a=1;
-    		fseek(course_check,0,SEEK_SET);
+    		fseek(fp,0,SEEK_SET);
     		break;
 		}
 	    else
 	       a=0;
 }
 }while(a==1);
+    
+    fp2 = fopen("new_course.txt", "a+");
+    fprintf(fp2, "\nCourse Name: %s", c1.course_name);
+    
     fflush(stdin);
-    gotoxy(22, 12);
+    gotoxy(22, 14);
 	printf("Enter credit hours: ");
 	scanf("%d", &c1.credit_hours);
-	fflush(stdin);
-	gotoxy(22,13);
-	printf("No of department in which course will be teach: ");
-	scanf("%d", &c1.course_department);
-	for(i=0; i<c1.course_department; i++){
-		fflush(stdin);
-		gotoxy(22, 14);
-		printf("Enter department name: ");
-		fflush(stdin);
-		gets(c1.department);
+	fprintf(fp2, "Credit hours: %d", c1.credit_hours);
+    fclose(fp2);
+	fclose(fp);
+	system("CLS");
+	gotoxy(22, 12);
+	printf("Course Added Successfully");
+	gotoxy(22, 16);
+	printf("Press B or b to go to the previous menu");
+	gotoxy(22, 17);
+	printf("Press E or e to exit");
+	gotoxy(22, 18);
+	char choice;
+	gotoxy(22, 19);
+	printf("Enter choice:");
+	scanf("%c", &choice);
+	switch(choice){
+		case 'B':
+		case 'b':
+			admin_course_management();
+			break;
+			
+		case 'E':
+		case 'e':
+			break;
+			
 	}
-	fflush(stdin);
-	gotoxy(22,14);
-	printf("Enter semester: ");
-	scanf("%d", &c1.semester);
-    fclose(course_check);
+
 }
 
-void admin_course_read(){                //to read all the course
+void admin_course_read(){                //to read all the new courses
+	system("CLS");
 	display_screen2();
 	FILE *fp;
-	fp = fopen("Course_Data.txt", "r");
+	fp = fopen("new_course.txt", "r");
 	char data[size];
 	int y = 12;
 	while(fgets(data, size, fp)){
 		gotoxy(22,y);
 		printf("%s", data);
 		y++;
+	}
+	gotoxy(22, 16);
+	printf("Press B or b to go to the previous menu");
+	gotoxy(22, 17);
+	printf("Press E or e to exit");
+	gotoxy(22, 18);
+	char choice;
+	fflush(stdin);
+	gotoxy(22, 19);
+	printf("Enter choice:");
+	scanf("%c", &choice);
+	switch(choice){
+		case 'B':
+		case 'b':
+			system("CLS");
+			admin_course_management();
+			break;
+			
+		case 'E':
+		case 'e':
+			break;
+			
 	}
 }
 
