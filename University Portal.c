@@ -338,20 +338,24 @@ void teacher_info_add(){                               //function to add teacher
     gotoxy(22,10);
     printf("Teacher information added successfully.....");
     gotoxy(22,12);
-    printf("Press 1 to go to the previous menu");
+    printf("Press B or b to go to the previous menu");
     gotoxy(22,13);
-    printf("Press 2 to exit");
+    printf("Press E or e to exit");
     gotoxy(22,15);
-    printf("Enter choice: ");
-    scanf("%d", &adminChoice);
-    switch(adminChoice){
-    	case 1:
-    		system("CLS");
-    		admin_teacher_information_management();
-    		break;
-    	
-    	case 2:
-    		break;
+    printf("Enter choice:");
+    char choice;
+    scanf("%c", &choice);
+    switch(choice){
+	    case 'B':
+	    case 'b':
+		  system("CLS");
+		  admin_student_information_management();
+		  break;
+			
+	    case 'E':
+	    case 'e':
+		  break;
+			
 	}
 }
 
@@ -397,23 +401,26 @@ void teacher_info_read(){                             //function to review teach
 		gotoxy(22, 14);
 		printf("\nSorry, couldn't find a match.\n");
 	}
-	
-	int choice;
+
 	gotoxy(22,++y);
-	printf("Press 1 for previous menu");
+	printf("Press B or b for previous menu");
 	gotoxy(22,++y);
-	printf("Press 2 to exit");
+	printf("Press E or e to exit");
 	gotoxy(22,++y);
-    printf("Select Choice: ");
-    scanf("%d", &choice);
+    printf("Enter choice:");
+    char choice;
+    scanf("%c", &choice);
     switch(choice){
-    	case 1:                     //to go to the previous menu
-		    system("CLS");                          
-    		admin_teacher_information_management();
-    		break;
-    		
-    	case 2:                         //to exit
-    		break;
+	    case 'B':
+	    case 'b':
+		  system("CLS");
+		  admin_student_information_management();
+		  break;
+			
+	    case 'E':
+	    case 'e':
+	 	  break;
+			
 	}
 }
 
@@ -494,20 +501,24 @@ void admin_teacher_information_remove(){                        //function to re
   gotoxy(22,10);
   printf("Teacher information removed successfully.....");
   gotoxy(22,12);
-  printf("Press 1 to go to the previous menu");
+  printf("Press B or b to go to the previous menu");
   gotoxy(22,13);
-  printf("Press 2 to exit");
+  printf("Press E or e to exit");
   gotoxy(22,15);
-  printf("Enter choice: ");
-  scanf("%d", &adminChoice);
-  switch(adminChoice){
-    case 1:
-    	system("CLS");
-    	admin_teacher_management();
-    	break;
-    	
-    case 2:
-    	break;
+  printf("Enter choice:");
+  char choice;
+  scanf("%c", &choice);
+  switch(choice){
+	  case 'B':
+	  case 'b':
+		system("CLS");
+		admin_teacher_management();
+		break;
+			
+	  case 'E':
+	  case 'e':
+		break;
+			
 	}
 }
 
@@ -590,6 +601,7 @@ void student_info_add(){                             //function to add student's
 	int semester;
 	char section;
 	long long int phone;
+	char fee[20];
     }t2;
     
 	FILE *fp;
@@ -615,7 +627,7 @@ void student_info_add(){                             //function to add student's
 	fflush(stdin);
 	gotoxy(22,12);
 	printf("Enter department: ");
-	scanf("%s", &t2.dep);
+	gets(t2.dep);
 	fprintf(fp, "Department: %s\n", t2.dep);
 	fflush(stdin);
 	
@@ -635,28 +647,39 @@ void student_info_add(){                             //function to add student's
 	fflush(stdin);
 	scanf("%lld", &t2.phone);
 	fprintf(fp, "Phone: %lld\n", t2.phone);
+	gotoxy(22, 16);
 	
+	printf("Enter fee status(Paid / Non- Paid): ");
+	fflush(stdin);
+	gets(t2.fee);
+	fprintf(fp, "Fee Status: %s", t2.fee);
+	gotoxy(22, 17);
 	fclose(fp);
+	
 	system("CLS");
     display_screen2();
     int adminChoice;
     gotoxy(22,10);
     printf("Student information added successfully.....");
     gotoxy(22,12);
-    printf("Press 1 to go to the previous menu");
+    printf("Press B or b to go to the previous menu");
     gotoxy(22,13);
-    printf("Press 2 to exit");
+    printf("Press E or e to exit");
     gotoxy(22,15);
-    printf("Enter choice: ");
-    scanf("%d", &adminChoice);
-    system("CLS");
-    switch(adminChoice){
-    	case 1:                               //to go to the previous menu
-    		admin_student_information_management();
-    		break;
-    	
-    	case 2:                                //to exit
-    		break;
+    printf("Enter choice:");
+    char choice;
+    scanf("%c", &choice);
+    switch(choice){
+	    case 'B':
+	    case 'b':
+		  system("CLS");
+		  admin_student_information_management();
+		  break;
+			
+	    case 'E':
+	    case 'e':
+		  break;
+			
 	}
 }
 
@@ -702,22 +725,25 @@ void student_info_read(){
 		printf("\nSorry, couldn't find a match.\n");
 	}
 	
-	int choice;
 	gotoxy(22,y);
-	printf("Press 1 for previous menu");
+	printf("Press B or b  for previous menu");
 	gotoxy(22,++y);
-	printf("Press 2 to exit");
+	printf("Press E or e to exit");
 	gotoxy(22,++y);
-    printf("Select Choice: ");
-    scanf("%d", &choice);
+    printf("Enter choice:");
+    char choice;
+    scanf("%c", &choice);
     switch(choice){
-    	case 1:                     //to go to the previous menu
-		    system("CLS");                          
-    		admin_student_information_management();
-    		break;
-    		
-    	case 2:                         //to exit
-    		break;
+	   case 'B':
+	   case 'b':
+	   	  system("CLS");
+	   	  admin_student_information_management();
+	   	  break;
+	   		
+	   case 'E':
+	   case 'e':
+	     	break;
+			
 	}
 	
 }
@@ -776,6 +802,7 @@ void admin_student_information_remove(){        //to remove student's informatio
       
     fgets(buffer, size, file);
 
+
    
     if (feof(file)) keep_reading = false;
     else if (strcmp(buffer, erasedata[j]) != 0)
@@ -799,21 +826,24 @@ void admin_student_information_remove(){        //to remove student's informatio
   gotoxy(22,10);
   printf("Student information removed successfully.....");
   gotoxy(22,12);
-  printf("Press 1 to go to the previous menu");
+  printf("Press B or b to go to the previous menu");
   gotoxy(22,13);
-  printf("Press 2 to exit");
+  printf("Press E or e to exit");
   gotoxy(22,15);
-  printf("Enter choice: ");
-  int adminChoice;
-  scanf("%d", &adminChoice);
-  switch(adminChoice){
-    case 1:
-    	system("CLS");
-    	admin_student_management();
-    	break;
-    	
-    case 2:
-    	break;
+  printf("Enter choice:");
+  char choice;
+  scanf("%c", &choice);
+  switch(choice){
+	  case 'B':
+	  case 'b':
+		system("CLS");
+		admin_student_management();
+		break;
+			
+	  case 'E':
+	  case 'e':
+		break;
+			
 	}
 }
 
