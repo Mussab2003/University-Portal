@@ -36,7 +36,8 @@ void student();
 
 int main(){
 	main_page();
-    }
+//    admin_password();
+	}
 
 void main_page(){                          //front page
 	char user_choice;
@@ -143,41 +144,20 @@ void display_screen2(){                         //for styling of all pages excep
 	}
 }
 
-//void admin_password(){                        //for password in admin portal
-//	display_screen2();
-//    
-//		
-////	 }
-//	 
-//	 if(strcmp(password, pass)==0){
-//	 	gotoxy(22,14);
-//	 	printf("Password is correct\n");
-//	 	system("CLS");
-////	 	admin();
-//	 }
-//	 
-//	 else if(strcmp(password, pass)!=0){
-//	 	int choice;
-//	 	gotoxy(22,14);
-//	    printf("Password is incorrect");
-//	 	gotoxy(22,15);
-//		printf("Press 1 to try again");
-//	 	gotoxy(22,16);
-//		printf("Press 2 to exit");
-//	 	gotoxy(22,18);
-//		printf("Enter choice: ");
-//		scanf("%d", &choice);
-//		switch(choice){
-//			case 1:
-//				system("CLS");
-//				admin_password();
-//				break;
-//			
-//			case 2:
-//				break;
-//		}	
-//	 }
-//}
+void admin_password(){                        //for password in admin portal
+	display_screen2();
+    char pass[5] = {"admin"};
+    char password[10];
+    gotoxy(22, 12);
+	printf("Enter password: ");
+	gets(password);
+//	printf("%s", password);
+	printf("%d", strcmp(pass, password));
+	if(strcmp(pass, password)==0){
+		printf("Correct Password");
+	}
+
+}
 
 void admin(){                                 //Admin Portal
 	display_screen2();
@@ -382,24 +362,23 @@ void teacher_info_read(){                             //function to review teach
 	strcat(namesearch, entername);
 	strcat(namesearch, "\n");
 	
-	int y = 11; 
-    int occurance;
-   while(fgets(stdata, size, fp) != NULL) {
-		if((strcmp(namesearch, stdata)) ==0) {
-			gotoxy(22,y);
-			printf("%s",stdata);
-			while(fgets(stdata,size,fp) && stdata[0] != '\n'){
-			    y++;
-				gotoxy(22,y);
-				printf("%s",stdata);
-		    }
-			occurance++;
-		}
+	int y = 12; 
+    int occurance = 0;
+    while(fgets(stdata, size, fp) != NULL) {
+		 if((strcmp(namesearch, stdata)) ==0) {
+			 gotoxy(22,y);
+			 printf("%s",stdata);
+			 while(fgets(stdata,size,fp) && stdata[0] != '\n'){
+			     y++;
+				 gotoxy(22,y);
+				 printf("%s",stdata);
+		     }
+			 occurance++;
+		 }
 	}
-    printf("%d\n",occurance);
 	if(occurance == 0) {
-		gotoxy(22, 14);
-		printf("\nSorry, couldn't find a match.\n");
+		gotoxy(22, 11);
+		printf("Sorry, couldn't find a match.");
 	}
 
 	gotoxy(22,++y);
@@ -414,7 +393,7 @@ void teacher_info_read(){                             //function to review teach
 	    case 'B':
 	    case 'b':
 		  system("CLS");
-		  admin_student_information_management();
+		  admin_teacher_information_management();
 		  break;
 			
 	    case 'E':
@@ -600,6 +579,7 @@ void student_info_add(){                             //function to add student's
 	char dep[50];
 	int semester;
 	char section;
+	char pass[50];
 	long long int phone;
 	char fee[20];
     }t2;
@@ -615,14 +595,15 @@ void student_info_add(){                             //function to add student's
 	
 	fflush(stdin);
 	gotoxy(22,10);
-	printf("Enter student's name: ");
-	gets(t2.name);
-	fprintf(fp, "\nStudent's Name: %s\n", t2.name);
-	
-	gotoxy(22,11);
 	printf("Enter ID: ");
 	scanf("%s", &t2.id);
-	fprintf(fp, "ID: %s\n", t2.id);
+	fprintf(fp, "\nID: %s\n", t2.id);
+
+	gotoxy(22,11);
+	printf("Enter student's name: ");
+	fflush(stdin);
+	gets(t2.name);
+	fprintf(fp, "Student's Name: %s\n", t2.name);
 	
 	fflush(stdin);
 	gotoxy(22,12);
@@ -643,6 +624,12 @@ void student_info_add(){                             //function to add student's
 	fprintf(fp, "Section: %c\n", t2.section);
 	
 	gotoxy(22,15);
+	printf("Enter password: ");
+	fflush(stdin);
+	scanf("%s", &t2.pass);
+	fprintf(fp, "Password: %s\n", t2.pass);
+	
+	gotoxy(22,16);
 	printf("Enter phone number: ");
 	fflush(stdin);
 	scanf("%lld", &t2.phone);
@@ -686,7 +673,7 @@ void student_info_add(){                             //function to add student's
 void student_info_read(){
 	display_screen2();
 	char stdata[size], entername[size];
-    char namesearch[size] = {"Student's Name: "};
+    char namesearch[size] = {"ID: "};
 	
 	stdata[size] = (char *)malloc(size * sizeof(char));
 	
@@ -700,14 +687,14 @@ void student_info_read(){
 	
 	fflush(stdin);
 	gotoxy(22,10);
-	printf("Enter student name: ");
+	printf("Enter student ID: ");
 	gets(entername);
 	
 	strcat(namesearch, entername);
 	strcat(namesearch, "\n");
 	
-	int y = 11; 
-    int occurance;
+	int y = 12; 
+    int occurance = 0;
    while(fgets(stdata, size, fp) != NULL) {
 		if((strcmp(namesearch, stdata)) ==0) {
 			gotoxy(22,y);
@@ -722,6 +709,7 @@ void student_info_read(){
 	}
 
 	if(occurance == 0) {
+		gotoxy(22,11);
 		printf("\nSorry, couldn't find a match.\n");
 	}
 	
