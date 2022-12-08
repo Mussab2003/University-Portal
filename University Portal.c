@@ -41,7 +41,7 @@ void add_attendance();
 void add_marking();
 void rev_marking();
 float GetGPA(float total);
-void student(char name[],char id[]);
+void student(char *name,int var,char id[]);
 void student_pass();
 
 
@@ -1581,7 +1581,7 @@ void student_pass(void){
    	     		}
    	     		if(i==5){
    	     			if(strcmp(pass_s,buffer)==0)
-   	     		     	student(st_name,id_c);
+   	     		     	student(st_name,strlen(st_name),id_c);
 				}
 	    	}	
 	 	}
@@ -1589,16 +1589,25 @@ void student_pass(void){
 	fclose(fp);
 }
 
-void student(char name[],char id[]){
+void student(char *name,int var,char id[]){
 	system("CLS");
 	display_screen2();
 	int i,st_choice;
 	gotoxy(30, 10);
 	printf("WELCOME BACK");
 	int x = 30;
-    for(i=16;i<=strlen(name);i++){
+    for(i=0;i<=var;i++){
+    	if(i>=0 && i<=15)
+    	{
+    		name++;
+    		continue;
+		}
+		else
+		{
 		gotoxy(x++, 11);
-		printf("%c",name[i]);
+		printf("%c",*name);
+		name++;
+    	}
     }
 	gotoxy(22, 13); 
 	printf("Press 1 to display your marks");
@@ -1674,3 +1683,4 @@ void student(char name[],char id[]){
    }
    fclose(pr);
 }
+
