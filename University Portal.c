@@ -33,13 +33,17 @@ void admin_course_add();//to add a new course
 void admin_course_read();//to read all the course
 void teacher();
 void teacher_pass();
+void teacher_mark_management();
+void teacher_attendance_management();
 void timetable_review();
 void rev_attendance();
 void add_attendance();
 void add_marking();
 void rev_marking();
 float GetGPA(float total);
-void student();
+void student(char name[],char id[]);
+void student_pass();
+
 
 int main(){
 //	admin_password();
@@ -48,12 +52,14 @@ int main(){
 	system("COLOR F3"); //to change the font colour
 	display_screen();
 	gotoxy(22,11);
-	printf("Press S for Student Portal\n");
+	printf("Press S or s for Student Portal");
 	gotoxy(22,12);
-	printf("Press T for Teacher Portal\n");
+	printf("Press T or t for Teacher Portal");
 	gotoxy(22,13);
-	printf("Press A for Admin Portal\n");
-	gotoxy(22,15);
+	printf("Press A or a for Admin Portal");
+	gotoxy(22,14);
+	printf("Press E or e to Exit");
+	gotoxy(22, 16);
 	printf("Select choice: ");
 	scanf(" %c", &user_choice);
 	fflush(stdin);
@@ -68,6 +74,16 @@ int main(){
 	    case 'T':
 	    case 't':
 	    	teacher_pass();
+	    	break;
+	    	
+	    case 'S':
+	    case 's':
+	    	student_pass();
+	    	break;
+	    	
+	    case 'E':
+	    case 'e':
+	    	system("CLS");
 	    	break;
 	}
 }
@@ -198,7 +214,7 @@ void admin_password(){
 	 	gotoxy(22,15);
 		printf("Press 1 to try again");
 	 	gotoxy(22,16);
-		printf("Press 2 to exit");
+		printf("Press 0 to exit");
 	 	gotoxy(22,18);
 		printf("Enter choice: ");
 		scanf("%d", &choice);
@@ -208,7 +224,8 @@ void admin_password(){
 				admin_password();
 				break;
 			
-			case 2:
+			case 0:
+				system("CLS");
 				break;
 		}	
 	 }
@@ -226,7 +243,7 @@ void admin(){                                 //Admin Portal
 	gotoxy(22,14);
 	printf("Press 3 for Course Management");
 	gotoxy(22,15);
-	printf("Press 4 to Exit");
+	printf("Press 0 to Exit");
     gotoxy(22,17);
 	printf("Enter choice: ");
     scanf("%d", &admin_choice);
@@ -245,8 +262,9 @@ void admin(){                                 //Admin Portal
 	    admin_course_management();	           //Course Management in Admin Portal
         break;
 	 
-	case 4:
-	    break;                                 //To Exit
+	case 0:                                    //To Exit
+		system("CLS");
+	    break;                                 
 	}
 }
 
@@ -260,12 +278,10 @@ void admin_teacher_management(){               //teacher management in admin por
     gotoxy(22,13);
     printf("Press 2 for Deleting Teacher's Information");
     gotoxy(22,14);
-    printf("Press 3 for Teacher's Salary Management");
+    printf("Press 9 to go to the Previous Menu");
     gotoxy(22,15);
-    printf("Press 4 to go to the Previous Menu");
-    gotoxy(22,16);
-    printf("Press 5 to Exit");
-	gotoxy(22,18);
+    printf("Press 0 to Exit");
+	gotoxy(22,17);
 	printf("Enter Choice: ");
     scanf("%d", &admin_choice_teacher);
     system("CLS");
@@ -278,12 +294,13 @@ void admin_teacher_management(){               //teacher management in admin por
         	admin_teacher_information_remove();
         	break;
           	   
-		case 4:                                 //To go to the previous menu
+		case 9:                                 //To go to the previous menu
 		    admin();
 		    break;
 			
-		case 5:                                  //To  Exit
-            break;		 
+		case 0:                                  //To  Exit
+            system("CLS");
+			break;		 
 	}
 } 
 
@@ -296,9 +313,9 @@ void admin_teacher_information_management(){              //teacher info add and
     gotoxy(22,12);
  	printf("Press 2 for adding new information");
     gotoxy(22,13);
-    printf("Press 3 to go to the previous menu");
+    printf("Press 9 to go to the previous menu");
     gotoxy(22,14);
-    printf("Press 4 to exit");
+    printf("Press 0 to exit");
     gotoxy(22,17);
  	printf("Enter choice: ");
     scanf("%d", &admin_choice_teacher_info);
@@ -312,11 +329,13 @@ void admin_teacher_information_management(){              //teacher info add and
       	    teacher_info_add();
             break;
                
-        case 3:
+        case 9:
 		    admin_teacher_management();                //to go to the previous menu
-		  	   
-		case 4:                                        //to exit
-		    break; 
+		  	break; 
+			     
+		case 0:                                        //to exit
+		    system("CLS");
+			break; 
     }
 }
 
@@ -380,22 +399,20 @@ void teacher_info_add(){                               //function to add teacher
     gotoxy(22,10);
     printf("Teacher information added successfully.....");
     gotoxy(22,12);
-    printf("Press B or b to go to the previous menu");
+    printf("Press 9 to go to the previous menu");
     gotoxy(22,13);
-    printf("Press E or e to exit");
+    printf("Press 0 to exit");
     gotoxy(22,15);
     printf("Enter choice:");
-    char choice;
-    scanf("%c", &choice);
+    int choice;
+    scanf("%d", &choice);
     switch(choice){
-	    case 'B':
-	    case 'b':
+ 	    case 9:                                  //to go to previous menu
 		  system("CLS");
-		  admin_student_information_management();
+		  admin_teacher_information_management();
 		  break;
 			
-	    case 'E':
-	    case 'e':
+	    case 0:                                 //to exit
 		  break;
 			
 	}
@@ -444,23 +461,22 @@ void teacher_info_read(){                             //function to review teach
 	}
 
 	gotoxy(22,++y);
-	printf("Press B or b for previous menu");
+	printf("Press 9 for previous menu");
 	gotoxy(22,++y);
-	printf("Press E or e to exit");
+	printf("Press 0 to exit");
 	gotoxy(22,++y);
     printf("Enter choice:");
-    char choice;
-    scanf("%c", &choice);
+    int choice;
+    scanf("%d", &choice);
     switch(choice){
-	    case 'B':
-	    case 'b':
+	    case 9:                          //to go to previous menu
 		  system("CLS");
 		  admin_teacher_information_management();
 		  break;
 			
-	    case 'E':
-	    case 'e':
-	 	  break;
+	    case 0:                           //to exit
+	 	   system("CLS");
+		   break;
 			
 	}
 }
@@ -468,7 +484,7 @@ void teacher_info_read(){                             //function to review teach
 void admin_teacher_information_remove(){                        //function to remove teacher's information in admin portal
 	display_screen2();
 	int adminChoice;
-	char erasedata[6][size];
+	char erasedata[5][size];
 	char stdata[size], entername[size];
     char namesearch[size] = {"Teacher's Name: "};
 	int i;
@@ -493,7 +509,7 @@ void admin_teacher_information_remove(){                        //function to re
 	while(fgets(stdata, size, fp)){
 		if(strcmp(namesearch, stdata)==0){
 			strcpy(erasedata[0],namesearch);
-		for(i=1;fgets(stdata, size, fp) && stdata[0] != '\n' && i<=5;i++){
+		for(i=1;fgets(stdata, size, fp) && stdata[0] != '\n' && i<=4;i++){
 				strcpy(erasedata[i],stdata);	
 			}
 	    }
@@ -542,28 +558,27 @@ void admin_teacher_information_remove(){                        //function to re
   gotoxy(22,10);
   printf("Teacher information removed successfully.....");
   gotoxy(22,12);
-  printf("Press B or b to go to the previous menu");
+  printf("Press 9 to go to the previous menu");
   gotoxy(22,13);
-  printf("Press E or e to exit");
+  printf("Press 0 to exit");
   gotoxy(22,15);
   printf("Enter choice:");
-  char choice;
-  scanf("%c", &choice);
+  int choice;
+  scanf("%d", &choice);
   switch(choice){
-	  case 'B':
-	  case 'b':
+	  case 9:                             //to go to the previous menu
 		system("CLS");
 		admin_teacher_management();
 		break;
 			
-	  case 'E':
-	  case 'e':
+	  case 0:                             //to exit
+	  	system("CLS");
 		break;
 			
 	}
 }
 
-void admin_student_management(){                                            //student management in admin portal
+void admin_student_management(){                   //student management in admin portal
 	display_screen2();
     int admin_choice_student;
 	gotoxy(22,10);
@@ -573,33 +588,34 @@ void admin_student_management(){                                            //st
     gotoxy(22,13);
     printf("Press 2 for Deleting Student's information\n");
     gotoxy(22,14);
-    printf("Press 5 to go to the previous menu");
-	gotoxy(22,16);
-	printf("Press 6 to exit");
-	gotoxy(22,18);
+    printf("Press 9 to go to the previous menu");
+	gotoxy(22,15);
+	printf("Press 0 to exit");
+	gotoxy(22,17);
     printf("Enter choice: ");
     scanf("%d", &admin_choice_student);
     system("CLS");
     switch(admin_choice_student){
-        case 1:                                                           //to add or review student information
+        case 1:                                        //to add or review student information
             admin_student_information_management();
             break;
         
 		case 2:
-		    admin_student_information_remove();                          //to remove student information
+		    admin_student_information_remove();        //to remove student information
 	        break;
 	        
-	    case 5:
-	    	admin();                                                    //to go to the previous menu
+	    case 9:
+	    	admin();                                   //to go to the previous menu
 	    	break;
 	
-	    case 6:                                                         //to exit
-	    	break;  
+	    case 0:                                       //to exit
+	    	system("CLS");
+			break;  
 	}
 	
 }
 
-void admin_student_information_management(){                           //student info add and review in admin portal  
+void admin_student_information_management(){       //student info add and review in admin portal  
 	display_screen2();
 	int admin_choice_student_info;
 	gotoxy(22,12);
@@ -607,28 +623,29 @@ void admin_student_information_management(){                           //student
     gotoxy(22,13);
 	printf("Press 2 for adding new information");
     gotoxy(22,14);
-    printf("Press 3 to go to the previous menu");
+    printf("Press 9 to go to the previous menu");
     gotoxy(22,15);
-    printf("Press 4 to exit");
-    gotoxy(22,16);
+    printf("Press 0 to exit");
+    gotoxy(22,17);
 	printf("Enter choice: ");
     scanf("%d", &admin_choice_student_info);
     system("CLS");
     switch(admin_choice_student_info){
-	    case 1:                                                         //student info review
+	    case 1:                                                     //student info review
 	    	student_info_read();
 	    	break;
 	    	
-	    case 2:                                                         //student info add
+	    case 2:                                                    //student info add
 	    	student_info_add();
 	    	break;
 		       
-	    case 3:                                                         //to go to previous menu
+	    case 9:                                                   //to go to previous menu
 	    	admin_student_management();                              
 	    	break;
 	    	
-	    case 4:                                                          //to exit
-	    	break;
+	    case 0:                                                  //to exit
+	    	system("CLS");
+			break;
 	}
 	
 }
@@ -692,17 +709,15 @@ void student_info_add(){                             //function to add student's
 	fprintf(fp, "Password: %s\n", t2.pass);
 	
 	gotoxy(22,16);
-	printf("Enter phone number: ");
-	fflush(stdin);
-	scanf("%lld", &t2.phone);
-	fprintf(fp, "Phone: %lld\n", t2.phone);
-	gotoxy(22, 16);
-	
 	printf("Enter fee status(Paid / Non- Paid): ");
 	fflush(stdin);
 	gets(t2.fee);
-	fprintf(fp, "Fee Status: %s", t2.fee);
+	fprintf(fp, "Fee Status: %s\n", t2.fee);
+	
 	gotoxy(22, 17);
+	printf("Enter phone number: ");	
+	scanf("%lld", &t2.phone);
+	fprintf(fp, "Phone: %lld\n", t2.phone);
 	fclose(fp);
 	
 	system("CLS");
@@ -711,22 +726,21 @@ void student_info_add(){                             //function to add student's
     gotoxy(22,10);
     printf("Student information added successfully.....");
     gotoxy(22,12);
-    printf("Press B or b to go to the previous menu");
+    printf("Press 9 to go to the previous menu");
     gotoxy(22,13);
-    printf("Press E or e to exit");
+    printf("Press 0 to exit");
     gotoxy(22,15);
     printf("Enter choice:");
-    char choice;
-    scanf("%c", &choice);
+    int choice;
+    scanf("%d", &choice);
     switch(choice){
-	    case 'B':
-	    case 'b':
-		  system("CLS");
+	    case 9:                                     //to go to the previous menu
+		  system("CLS"); 
 		  admin_student_information_management();
 		  break;
 			
-	    case 'E':
-	    case 'e':
+	    case 0:                                     //to exit
+	      system("CLS");	
 		  break;
 			
 	}
@@ -755,7 +769,7 @@ void student_info_read(){
 	strcat(namesearch, entername);
 	strcat(namesearch, "\n");
 	
-	int y = 12; 
+	int y = 11; 
     int occurance = 0;
    while(fgets(stdata, size, fp) != NULL) {
 		if((strcmp(namesearch, stdata)) ==0) {
@@ -776,22 +790,21 @@ void student_info_read(){
 	}
 	
 	gotoxy(22,y);
-	printf("Press B or b  for previous menu");
+	printf("Press 9 for previous menu");
 	gotoxy(22,++y);
-	printf("Press E or e to exit");
+	printf("Press 0 to exit");
 	gotoxy(22,++y);
     printf("Enter choice:");
-    char choice;
-    scanf("%c", &choice);
+    int choice;
+    scanf("%d", &choice);
     switch(choice){
-	   case 'B':
-	   case 'b':
+	   case 9:                                   //to go to the previous menu
 	   	  system("CLS");
 	   	  admin_student_information_management();
 	   	  break;
 	   		
-	   case 'E':
-	   case 'e':
+	   case 0:                                   //to exit
+	   	    system("CLS");
 	     	break;
 			
 	}
@@ -800,9 +813,9 @@ void student_info_read(){
 
 void admin_student_information_remove(){        //to remove student's information
 	display_screen2();
-	char erasedata[6][size];
+	char erasedata[8][size];
 	char stdata[size], entername[size];
-    char namesearch[size] = {"Student's Name: "};
+    char namesearch[size] = {"ID: "};
 	int i;
 //	stdata[size] = (char *)malloc(size * sizeof(char));
 	
@@ -815,7 +828,7 @@ void admin_student_information_remove(){        //to remove student's informatio
 	}
 	
 	gotoxy(22,10);
-	printf("Enter student name to delete record: ");
+	printf("Enter student id to delete record: ");
 	fflush(stdin);
 	gets(entername);
 	
@@ -825,7 +838,7 @@ void admin_student_information_remove(){        //to remove student's informatio
 	while(fgets(stdata, size, fp)){
 		if(strcmp(namesearch, stdata)==0){
 			strcpy(erasedata[0],namesearch);
-		for(i=1;fgets(stdata, size, fp) && stdata[0] != '\n' && i<=5;i++){
+		for(i=1;fgets(stdata, size, fp) && i<=7;i++){
 				strcpy(erasedata[i],stdata);	
 			}
 	    }
@@ -876,22 +889,21 @@ void admin_student_information_remove(){        //to remove student's informatio
   gotoxy(22,10);
   printf("Student information removed successfully.....");
   gotoxy(22,12);
-  printf("Press B or b to go to the previous menu");
+  printf("Press 9 to go to the previous menu");
   gotoxy(22,13);
-  printf("Press E or e to exit");
+  printf("Press 0 to exit");
   gotoxy(22,15);
   printf("Enter choice:");
-  char choice;
-  scanf("%c", &choice);
+  int choice;
+  scanf("%d", &choice);
   switch(choice){
-	  case 'B':
-	  case 'b':
+	  case 9:                                    //to go to the previous menu
 		system("CLS");
 		admin_student_management();
 		break;
 			
-	  case 'E':
-	  case 'e':
+	  case 0:                                    //to exit
+		system("CLS");
 		break;
 			
 	}
@@ -906,25 +918,36 @@ void admin_course_management(){           //course management in admin portal
 	printf("Press 1 for reviewing courses");
 	gotoxy(22,13);
 	printf("Press 2 for adding new course");
-	gotoxy(22,18);
+	gotoxy(22, 14);
+	printf("Press 9 to go to Previous Menu");
+	gotoxy(22, 15);
+	printf("Press 0 to exit");
+	gotoxy(22,17);
 	printf("Enter choice: ");
 	scanf("%d", &admin_choice_course);
 	switch(admin_choice_course){
-		case 1:
+		case 1:                                       //to add new course
 			admin_course_read();
 			break;
 			
-		case 2:
+		case 2:                                      //to review new courses
 			admin_course_add();
 			break;
+	
+	    case 9:                                      //to go to the previous menu
+	    	admin();
+	    	break;
+	    	
+	    case 0:                                      //to exit
+	    	system("CLS");
+	    	break;
 	}
 }
 
 void admin_course_add(){                               //to add course in admin portal
     system("CLS");                             
 	display_screen2();
-	int max_size = 1000;
-	char buffer[max_size]; 
+	char buffer[size]; 
 	FILE *fp, *fp2;
 	fp = fopen("Course_ Data.txt", "r");
 	if(fp == NULL){
@@ -943,7 +966,7 @@ void admin_course_add(){                               //to add course in admin 
 	printf("Enter course name: ");
 	gets(c1.course_name);
 	strcat(c1.course_name, "\n");
-    while(fgets(buffer, max_size, fp)){
+    while(fgets(buffer, size, fp)){
     	if(strcmp(c1.course_name,buffer)==0){
     		system("CLS");
     		display_screen2();
@@ -959,35 +982,36 @@ void admin_course_add(){                               //to add course in admin 
 }while(a==1);
     
     fp2 = fopen("new_course.txt", "a+");
-    fprintf(fp2, "\nCourse Name: %s", c1.course_name);
+    fprintf(fp2, "\nCourse Name: %s\n", c1.course_name);
     
     fflush(stdin);
     gotoxy(22, 14);
 	printf("Enter credit hours: ");
 	scanf("%d", &c1.credit_hours);
-	fprintf(fp2, "Credit hours: %d", c1.credit_hours);
+	fprintf(fp2, "Credit hours: %d\n", c1.credit_hours);
     fclose(fp2);
 	fclose(fp);
 	system("CLS");
+	display_screen2();
 	gotoxy(22, 12);
 	printf("Course Added Successfully");
 	gotoxy(22, 16);
-	printf("Press B or b to go to the previous menu");
+	printf("Press 9 to go to the previous menu");
 	gotoxy(22, 17);
-	printf("Press E or e to exit");
+	printf("Press 0 to exit");
 	gotoxy(22, 18);
-	char choice;
+	int choice;
 	gotoxy(22, 19);
 	printf("Enter choice:");
-	scanf("%c", &choice);
+	scanf("%d", &choice);
 	switch(choice){
-		case 'B':
-		case 'b':
-			admin_course_management();
+		case 9:
+			system("CLS");
+			admin_course_management();                          //to go to previous menu
 			break;
 			
-		case 'E':
-		case 'e':
+		case 0:
+			system("CLS");                                      //to exit
 			break;
 			
 	}
@@ -1006,25 +1030,24 @@ void admin_course_read(){                //to read all the new courses
 		printf("%s", data);
 		y++;
 	}
-	gotoxy(22, 16);
-	printf("Press B or b to go to the previous menu");
-	gotoxy(22, 17);
-	printf("Press E or e to exit");
+	gotoxy(22, ++y);
+	printf("Press 9 to go to the previous menu");
+	gotoxy(22, ++y);
+	printf("Press 0 to exit");
 	gotoxy(22, 18);
-	char choice;
+	int choice;
 	fflush(stdin);
-	gotoxy(22, 19);
+	gotoxy(22, ++y);
 	printf("Enter choice:");
-	scanf("%c", &choice);
+	scanf("%d", &choice);
 	switch(choice){
-		case 'B':
-		case 'b':
+		case 9:                                           //to go to the previous menu
 			system("CLS");
 			admin_course_management();
 			break;
 			
-		case 'E':
-		case 'e':
+		case 0:
+			system("CLS");                               //to exit
 			break;
 			
 	}
@@ -1057,6 +1080,28 @@ void teacher_pass(){
 			}
 	    }
 }
+//    if(strcmp(name_t, data)!= 0 || strcmp(pass_t, data)!= 0){
+//    	gotoxy(22, 13);
+//		printf("Name or Password Incorrect");
+//	    gotoxy(22, 14);
+//	    printf("Press 1 to try again");
+//	    gotoxy(22, 15);
+//	    printf("Press 0 to exit");
+//	    int choice;
+//	    gotoxy(22, 17);
+//	    printf("Enter choice: ");
+//	    scanf("%d", &choice);
+//	    switch(choice){
+//	    	case 1:                                       //to try again
+//	    		system("CLS");
+//	    		teacher_pass();
+//	    		break;
+//	    		 
+//	    	case 0:                                       //to exit
+//	    		system("CLS");
+//	    		break;
+//		}
+//	}
 fclose(fp);
 }
 
@@ -1076,52 +1121,53 @@ void teacher(){
    switch(choice)
       {
       	case 1:
-      		system("CLS");
-      		display_screen2();
-      		gotoxy(22, 11);
-      		printf("Press 1 to add marking");
-			gotoxy(22, 12);
-			printf("Press 2 to review marking");
-      		gotoxy(22, 14);
-      		printf("Enter choice: ");
-			scanf("%d",&mark_choice);
-      		switch(mark_choice)
-      		{
-      			case 1:
-      				add_marking();
-      				break;
-      			case 2:
-      				rev_marking();
-      				break;
-			  }
-		break;
+      		teacher_mark_management();
+		    break;
 		
 		case 2:
-			system("CLS");
-			display_screen2();
-			gotoxy(22, 11);
-			printf("Press 1 to add attendance");
-			gotoxy(22, 12);
-			printf("Press 2 to review attendance");
-			gotoxy(22, 14);
-			printf("Enter Choice: ");
-      		scanf("%d",&att_choice);
-      		switch(att_choice)
-      		{
-      			case 1:
-      				add_attendance();
-      				break;
-      			case 2:
-      				rev_attendance();
-      				break;
-			  }
-		break;
+			teacher_attendance_management();
+			break;
 		
 		case 3:
-             timetable_review();
-        break;
+            timetable_review();
+        	break;
 	  }	
 }
+
+void teacher_mark_management(){
+	system("CLS");
+    display_screen2();
+	gotoxy(22, 11);
+	printf("Press 1 to add marking");
+	gotoxy(22, 12);
+	printf("Press 2 to review marking");
+	gotoxy(22, 13);
+	printf("Press 9 to go to previous menu");
+	gotoxy(22, 14);
+	printf("Press 0 to exit");
+    gotoxy(22, 16);
+	printf("Enter choice: ");
+	int mark_choice;
+	scanf("%d", &mark_choice);
+	switch(mark_choice){
+		case 1:
+			add_marking();
+			break;
+		
+		case 2:
+			rev_marking();
+			break;
+	    
+	    case 9:
+		    teacher();
+			break; 
+	    
+	    case 0:
+	    	system("CLS");
+	    	break;
+	  }
+}
+
 void add_marking(){
 	system("CLS");
 	display_screen2();
@@ -1135,74 +1181,69 @@ void add_marking(){
 	fp= fopen("student_marking.txt","a");
 	pr= fopen("student_info_add.txt","r");
 	
-	gotoxy(22, 11);
+	gotoxy(22, 10);
 	printf("Enter the student ID to add marks: ");
 	scanf("%s",id);
 	strcat(id_c,id);
 	strcat(id_c, "\n");
-	int y=12;
 	while(fgets(data, size, pr)){
 		if(strcmp(id_c,data)==0){
-			gotoxy(22, y);
 			fprintf(fp,"%s",data);
 		int i;
 		for(i=1;fgets(data, size, pr) && data[0] != '\n' && i<=6;i++){
-				gotoxy(22, y++);
 				fprintf(fp,"%s",data);
-				if(i==1||i==2||i==3||i==4)
+				if(i==1){
+				    gotoxy(22, 11);			
 				    printf("%s",data);
+				}
 			}
 	    }
 }
-    gotoxy(22, y++);
-    int choice;
-    printf("Press 1 for Adding Marks");
-    gotoxy(22, y++);
-    printf("Press E or e to exit");
-    gotoxy(22, y++);
-    printf("Enter Choice: ");
-    scanf("%d", &choice);
-    switch(choice){
-    	case 1:
-    		system("CLS");
-    		display_screen2();
-            gotoxy(22, 11);
+            gotoxy(22, 12);
             printf("Enter Assignments weightage /10: ");
             scanf("%f",&asg);
             fprintf(fp,"Assignmnet: %.1f\n",asg);
-            gotoxy(22, 12);
+            gotoxy(22, 13);
             printf("Enter quizzes weightage /10: ");
             scanf("%f",&quiz);
             fprintf(fp,"Quizzes: %.1f\n",quiz);
-            gotoxy(22, 13);
+            gotoxy(22, 14);
 			printf("Enter mid 1 weightage /15: ");
 		    scanf("%f",&mid1);
 		    fprintf(fp,"Mid1: %.1f\n",mid1);
-			gotoxy(22, 14);
+			gotoxy(22, 15);
 			printf("Enter mid 2 weightage /15: ");
 		    scanf("%f",&mid2);
 		    fprintf(fp,"Mid2: %.1f\n",mid2);
 		    fflush(stdin);
-		    gotoxy(22, 15);
+		    gotoxy(22, 16);
 		    printf("Enter Finals weightage /50: ");
 		    scanf("%f",&final);
 		    fprintf(fp,"Final: %.1f\n",final);
 			total= asg+ quiz +mid1+mid2+final;
 		    gpa =GetGPA(total);
-		    gotoxy(22, 16);
+		    gotoxy(22, 17);
 		    printf("Calculated GPA is %.2f",gpa);
 		    fprintf(fp,"GPA: %.2f\n",gpa);
 		    fputs("\n\n",fp);  
 			fclose(pr);				     
 		    fclose(fp);
-		    break;
-			
-		case 'E':
-		case 'e':
-		    break;     		
-	}
-	
-	 		                    
+		    gotoxy(22, 18);
+		    printf("Press 9 to go to Previous Menu or Press 0 to Exit");
+		    gotoxy(22, 18);
+		    printf("Enter choice");
+		    int choice;
+	        scanf("%d", &choice);
+	 		switch(choice){
+	 			case 9:
+	 				system("CLS");
+	 				teacher_mark_management();
+	 				break;
+	 				
+	 			case 0:
+	 				system("CLS");
+	 				break;
+			 }                    
 }
 
 void rev_marking(){
@@ -1215,7 +1256,7 @@ void rev_marking(){
 	
 	FILE *fp;
 	fp= fopen("student_marking.txt","r");
-	gotoxy(22, 11);
+	gotoxy(22, 10);
 	printf("Enter the student ID to review marks: ");
 	scanf("%s",id);
 	strcat(id_c,id);
@@ -1223,8 +1264,14 @@ void rev_marking(){
 	int occur=0;
 	while(fgets(data, size,fp)){
 		if(strcmp(id_c,data)==0){
-		while(fgets(data, size,fp) && data[0] != '\n'){
-				printf("%s",data);
+			int i;
+			int y = 11;
+		for(i=1; fgets(data, size,fp) && data[0] != '\n' && i<=12; i++){
+                if(i==1 || i==7 || i==8 || i==9 || i==10 || i==11 || i==12){
+				   gotoxy(22, y);
+				   printf("%s",data);
+				   y++;
+			    }
 			}
 			occur++;
 	    }
@@ -1234,10 +1281,62 @@ if(occur == 0) {
 		printf("Sorry, Student marks are not entered yet.");
 	}
   fclose(fp);
+            gotoxy(22, 18);  
+            printf("Press 9 to go to Previous Menu or Press 0 to Exit");
+		    gotoxy(22, 19);
+		    printf("Enter choice");
+		    int choice;
+	        scanf("%d", &choice);
+	 		switch(choice){
+	 			case 9:
+	 				system("CLS");
+	 				teacher_mark_management();
+	 				break;
+	 				
+	 			case 0:
+	 				system("CLS");
+	 				break;
+			 }
 }
+
+void teacher_attendance_management(){
+	system("CLS");
+	display_screen2();
+	gotoxy(22, 11);
+	printf("Press 1 to add attendance");
+	gotoxy(22, 12);
+	printf("Press 2 to review attendance");
+	gotoxy(22, 13);
+	printf("Press 9 to go to Previous Menu");
+	gotoxy(22, 14);
+	printf("Press 0 to Exit");
+	gotoxy(22, 16);
+	printf("Enter Choice: ");
+	int att_choice;
+	scanf("%d",&att_choice);
+	switch(att_choice){
+		case 1:
+			add_attendance();
+			break;
+			
+		case 2:
+			rev_attendance();
+			break;
+			
+		case 9:
+			teacher();
+			break;
+			
+		case 0:
+			system("CLS");
+			break;
+	}
+}
+
 
 void add_attendance(){
 	system("CLS");
+	display_screen2();
 	int days;
 	char data[size];
 	char id[15];
@@ -1251,89 +1350,177 @@ void add_attendance(){
 	scanf("%s",id);
 	strcat(id_c,id);
 	strcat(id_c, "\n");
-	int y=12;
 	while(fgets(data, size, pr)){
 		if(strcmp(id_c,data)==0){
-			gotoxy(22, y);
 			fprintf(fp,"%s",data);	
 		int i;
 		for(i=1;fgets(data, size, pr) && data[0] != '\n' && i<=12;i++){
-				gotoxy(22, y++);
 				fprintf(fp,"%s",data);
-				if(i==1|| i==2 || i==3 || i==4)
-				    gotoxy(22, y++);
+				if(i==1){
+				    gotoxy(22, 12);
 					printf("%s",data);
+				}
 			}
 	    }
-}   printf("\nEnter the total no. days attended by student /90");
+}   
+    gotoxy(22, 13);
+    printf("Enter the total no. days attended by student /90: ");
     scanf("%d",&days);
     int percent= (days/90.0)*100.0;
     fprintf(fp,"Attendance Percentage: %d %",percent);
-    printf("Attendance added Successfully\n");
-    printf("\nAttendance Percentage calculated to be: %d %",percent);
+    system("CLS");
+    display_screen2();
+    gotoxy(22, 11);
+	printf("Attendance added Successfully\n");
+	gotoxy(22, 13);
+    printf("Attendance Percentage calculated to be: %d %",percent);
     fputs("\n\n",fp);
     fclose(fp);
     fclose(pr);
+    
+    gotoxy(22, 15);  
+    printf("Press 9 to go to Previous Menu");
+    gotoxy(22, 16);
+    printf("Press 0 to exit");
+    gotoxy(22, 17);
+    printf("Enter choice: ");
+    int choice;
+    scanf("%d", &choice);
+	switch(choice){
+		case 9:
+			system("CLS");
+			teacher_attendance_management();
+			break;
+			
+		case 0:
+			system("CLS");
+			break;
+	 }
+    
 }
 
-void timetable_review(void)
-{
-	int time_choice;
-	char buffer[1000];
-	FILE *fp;
-		printf("\t\t\tWELCOME TO TIMETABLE REVIEW\t\t\t");
-	        printf("\n\nSelect a Day to showcase its timetable\n\nPress\n1 for Monday\n2 for Tuesday\n3 for Wednesday\n4 for Thursday\n5 for Friday\n");
-	        scanf("%d", &time_choice);
-	        switch(time_choice)
-	        {
-		    case 1:
-			   fp= fopen("Monday.txt","r");
-			break;
-		    case 2:
-			   fp= fopen("Tuesday.txt","r");
-			break;
-		    case 3:
-			   fp= fopen("Wednesday.txt","r");
-			break;
-		    case 4:
-			   fp= fopen("Thursday.txt","r");
-			break;
-		    case 5:
-			   fp= fopen("Friday.txt","r");
-			break;
-         	}
-          while(fgets(buffer,1000,fp))
-              {
-              	printf("%s",buffer);
-            	}
-}
-
-void rev_attendance(void)
-{
+void rev_attendance(){
+	system("CLS");
+	display_screen2();
 	char data[size];
 	FILE *fp;
 	fp= fopen("student_attendance.txt","r");
 	char id[15];
 	char id_c[size]={"ID: "};
-	printf("Enter the student ID to review attendance\t");
+	gotoxy(22, 11);
+	printf("Enter the student ID to review attendance: ");
 	scanf("%s",id);
 	strcat(id_c,id);
 	strcat(id_c, "\n");
 	while(fgets(data, size, fp)){
 		if(strcmp(id_c,data)==0){
 		int i;
-		for(i=1;fgets(data, size, fp) && data[0] != '\n' && i<=11;i++){
-				if(i==1|| i==2 || i==3 || i==4 || i==11)
-				    printf("%s",data);
+		int y = 12;
+		for(i=1;fgets(data, size, fp) && data[0] != '\n' && i<=13 ;i++){
+				if(i==1 || i==13){
+				    gotoxy(22, y++);
+					printf("%s",data);
+				}
 			}
 	    }
 } 
    fclose(fp);
 	
+	gotoxy(22, 14);  
+    printf("Press 9 to go to Previous Menu");
+    gotoxy(22, 15);
+    printf("Press 0 to exit");
+    gotoxy(22, 16);
+    printf("Enter choice");
+    int choice;
+    scanf("%d", &choice);
+	switch(choice){
+		case 9:
+			system("CLS");
+			teacher_attendance_management();
+			break;
+			
+		case 0:
+			system("CLS");
+			break;
+	 }
 }
-
-
-
+void timetable_review(void)
+{
+	system("CLS");
+	display_screen2();
+	int time_choice;
+	char buffer[1000];
+	FILE *fp;
+	gotoxy(22, 10);
+	printf("WELCOME TO TIMETABLE REVIEW");
+	gotoxy(22, 11);        
+	printf("Select a Day to showcase its timetable");
+	gotoxy(22, 12);
+	printf("Press 1 for Monday");
+	gotoxy(22, 13);
+	printf("Press 2 for Tuesday");
+	gotoxy(22, 14);
+	printf("Press 3 for Wednesday");
+	gotoxy(22, 15);
+	printf("Press 4 for Thursday");
+	gotoxy(22, 16);
+	printf("Press 5 for Friday");
+	gotoxy(22, 17);
+	printf("Press 9 for Previous Menu or Press 0 to exit");
+	gotoxy(22, 19);
+	printf("Ente choice: ");        
+	scanf("%d", &time_choice);
+	switch(time_choice){
+		case 1:
+			fp= fopen("Monday.txt","r");
+			break;
+		    
+			case 2:
+			fp= fopen("Tuesday.txt","r");
+			break;
+		    
+			case 3:
+			fp= fopen("Wednesday.txt","r");
+			break;
+		    
+			case 4:
+			fp= fopen("Thursday.txt","r");
+			break;
+		    
+			case 5:
+			fp= fopen("Friday.txt","r");
+			break;
+			
+			case 9:
+			teacher();
+			break;
+			
+			case 0:
+			system("CLS");
+			break;
+    }
+    system("CLS");  
+	while(fgets(buffer,1000,fp)){
+		printf("%s",buffer);
+            	}
+              
+            printf("\nPress 9 to go to Previous Menu\n");
+		    printf("Press 0 to exit\n");
+		    printf("Enter choice\n");
+		    int choice;
+	        scanf("%d", &choice);
+	 		switch(choice){
+	 			case 9:
+	 				system("CLS");
+	 				timetable_review();
+	 				break;
+	 				
+	 			case 0:
+	 				system("CLS");
+	 				break;
+			 }
+}
 
 float GetGPA(float total)
 {
@@ -1361,4 +1548,129 @@ float GetGPA(float total)
         return(0);
     else
        printf("Wrong weightage input, out of 0-100 range");
+}
+void student_pass(void){
+	system("CLS");
+	display_screen2();
+	int i;
+    char st_id[20];
+    char st_name[40];
+    char st_pass[20];
+    char pass_s[20]={"Password: "};
+    char buffer[size];
+    char id_c[size]={"ID: "};
+    gotoxy(22, 10);
+    printf("Welcome to Student's Portal: ");
+    gotoxy(22, 12);
+    printf("Enter your Roll number to log-in: ");
+    scanf("%s",st_id);
+    strcat(id_c,st_id);
+    strcat(id_c, "\n");
+    FILE *fp;
+    fp= fopen("student_attendance.txt","r");
+    while(fgets(buffer,size,fp)!=NULL){
+   	    if(strcmp(id_c,buffer)==0){
+   	  	    gotoxy(22, 13);
+		    printf("Enter password: ");
+	   	  	scanf("%s",st_pass);
+	   	  	strcat(pass_s,st_pass);
+	        strcat(pass_s, "\n");
+	   	  	for(i=1;fgets(buffer, size,fp) && buffer[0] != '\n'&& i<=12;i++){
+	   	  		if(i==1){
+   	  			strcpy(st_name,buffer);
+   	     		}
+   	     		if(i==5){
+   	     			if(strcmp(pass_s,buffer)==0)
+   	     		     	student(st_name,id_c);
+				}
+	    	}	
+	 	}
+    }  
+	fclose(fp);
+}
+
+void student(char name[],char id[]){
+	system("CLS");
+	display_screen2();
+	int i,st_choice;
+	gotoxy(30, 10);
+	printf("WELCOME BACK");
+	int x = 30;
+    for(i=16;i<=strlen(name);i++){
+		gotoxy(x++, 11);
+		printf("%c",name[i]);
+    }
+	gotoxy(22, 13); 
+	printf("Press 1 to display your marks");
+	gotoxy(22, 14);
+	printf("Press 2 to display your attendance percentage");
+	gotoxy(22, 15);
+	printf("Press 3 to display your Fees status");
+	gotoxy(22, 16);
+	printf("Press 4 for timetable review");
+    gotoxy(22 ,18);
+	printf("Enter Choice: ");
+    scanf("%d",&st_choice);
+    char buffer[size];
+    FILE *pr;
+    pr= fopen("student_attendance.txt","r");
+    switch(st_choice){
+    	int y = 10;
+   	    case 1:
+   	    	system("CLS");
+   	    	display_screen2();
+   		    while(fgets(buffer,size,pr)!=NULL){
+   	            if(strcmp(id,buffer)==0){
+   	    	        for(i=1;fgets(buffer, size,pr) && buffer[0] != '\n'&& i<=13;i++){
+   	    		        if(i==1 || i==5 ||i==6 ||i==13){
+   	    			        continue;
+				        }
+				        
+			 	        else{ 	
+			 	        	gotoxy(22, y);
+   	  	    	            printf("%s",buffer);
+   	  	    	            y++;
+			            }
+			        }     
+		        }      
+            }  
+	        break;
+	
+		case 2:
+			y = 10;
+			system("CLS");
+			display_screen2();
+        	while(fgets(buffer,size,pr)!=NULL){
+   	    		if(strcmp(id,buffer)==0){
+   	    			for(i=1;fgets(buffer, size,pr) && buffer[0] != '\n'&& i<=13;i++){
+   	    				if(i==1||i==2||i==3||i==4||i==13){
+			 	        	gotoxy(22, ++y);
+							printf("%s",buffer);
+			            }
+			 		}	
+		 		}
+        	}
+    		break;
+    
+   		case 3:
+   			y = 10;
+   			system("CLS");
+   			display_screen2();
+    		while(fgets(buffer,size,pr)!=NULL){
+   	    		if(strcmp(id,buffer)==0){
+   	    			for(i=1;fgets(buffer, size,pr) && buffer[0] != '\n'&& i<=13;i++){
+   	    				if(i==1||i==2||i==3||i==4||i==6){
+			 	        	gotoxy(22, ++y);
+							printf("%s",buffer);
+                    	}
+			  		}
+		 		}
+        	}
+    		break;
+    
+    	case 4:
+			timetable_review();
+			break;
+   }
+   fclose(pr);
 }
