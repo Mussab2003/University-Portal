@@ -423,8 +423,6 @@ void teacher_info_read(){                             //function to review teach
 	char stdata[size], entername[size];
     char namesearch[size] = {"Teacher's Name: "};
 	
-//	stdata[size] = (char *)malloc(size * sizeof(char));
-	
 	FILE *fp;
     
 	fp = fopen("teacher_info_add.txt", "r");
@@ -488,7 +486,6 @@ void admin_teacher_information_remove(){                        //function to re
 	char stdata[size], entername[size];
     char namesearch[size] = {"Teacher's Name: "};
 	int i;
-//	stdata[size] = (char *)malloc(size * sizeof(char));
 	
 	FILE *fp;
     
@@ -751,7 +748,6 @@ void student_info_read(){
 	char stdata[size], entername[size];
     char namesearch[size] = {"ID: "};
 	
-//	stdata[size] = (char *)malloc(size * sizeof(char));
 	
 	FILE *fp;
     
@@ -817,7 +813,6 @@ void admin_student_information_remove(){        //to remove student's informatio
 	char stdata[size], entername[size];
     char namesearch[size] = {"ID: "};
 	int i;
-//	stdata[size] = (char *)malloc(size * sizeof(char));
 	
 	FILE *fp;
     
@@ -1080,28 +1075,7 @@ void teacher_pass(){
 			}
 	    }
 }
-//    if(strcmp(name_t, data)!= 0 || strcmp(pass_t, data)!= 0){
-//    	gotoxy(22, 13);
-//		printf("Name or Password Incorrect");
-//	    gotoxy(22, 14);
-//	    printf("Press 1 to try again");
-//	    gotoxy(22, 15);
-//	    printf("Press 0 to exit");
-//	    int choice;
-//	    gotoxy(22, 17);
-//	    printf("Enter choice: ");
-//	    scanf("%d", &choice);
-//	    switch(choice){
-//	    	case 1:                                       //to try again
-//	    		system("CLS");
-//	    		teacher_pass();
-//	    		break;
-//	    		 
-//	    	case 0:                                       //to exit
-//	    		system("CLS");
-//	    		break;
-//		}
-//	}
+
 fclose(fp);
 }
 
@@ -1589,9 +1563,13 @@ void student_pass(void){
 	fclose(fp);
 }
 
-void student(char *name,int var,char id[]){
+void student(char name[],int var,char id[]){
+	
 	system("CLS");
 	display_screen2();
+	char *ip;
+	ip= (char *) calloc(var,sizeof(char));
+	ip= name;
 	int i,st_choice;
 	gotoxy(30, 10);
 	printf("WELCOME BACK");
@@ -1599,14 +1577,14 @@ void student(char *name,int var,char id[]){
     for(i=0;i<=var;i++){
     	if(i>=0 && i<=15)
     	{
-    		name++;
+    		ip++;
     		continue;
 		}
 		else
 		{
 		gotoxy(x++, 11);
-		printf("%c",*name);
-		name++;
+		printf("%c",*ip);
+		ip++;
     	}
     }
 	gotoxy(22, 13); 
@@ -1681,6 +1659,7 @@ void student(char *name,int var,char id[]){
 			timetable_review();
 			break;
    }
+   free(ip);
    fclose(pr);
 }
 
