@@ -46,11 +46,14 @@ void student_pass();
 
 
 int main(){
-//	admin_password();
     int  user_choice;
 	system("CLS");
-	system("COLOR F3"); //to change the font colour
+	system("COLOR 73"); //to change the font colour
 	display_screen();
+	gotoxy(30, 1);
+	printf("Prepared By: Muhammad Mussab (22K-4146)"); 
+	gotoxy(43, 2);
+	printf("Shariq Nadeem (22K-4285)");
 	gotoxy(22,11);
 	printf("Press S or s for Student Portal");
 	gotoxy(22,12);
@@ -423,6 +426,8 @@ void teacher_info_read(){                             //function to review teach
 	char stdata[size], entername[size];
     char namesearch[size] = {"Teacher's Name: "};
 	
+//	stdata[size] = (char *)malloc(size * sizeof(char));
+	
 	FILE *fp;
     
 	fp = fopen("teacher_info_add.txt", "r");
@@ -486,6 +491,7 @@ void admin_teacher_information_remove(){                        //function to re
 	char stdata[size], entername[size];
     char namesearch[size] = {"Teacher's Name: "};
 	int i;
+//	stdata[size] = (char *)malloc(size * sizeof(char));
 	
 	FILE *fp;
     
@@ -748,6 +754,7 @@ void student_info_read(){
 	char stdata[size], entername[size];
     char namesearch[size] = {"ID: "};
 	
+//	stdata[size] = (char *)malloc(size * sizeof(char));
 	
 	FILE *fp;
     
@@ -813,6 +820,7 @@ void admin_student_information_remove(){        //to remove student's informatio
 	char stdata[size], entername[size];
     char namesearch[size] = {"ID: "};
 	int i;
+//	stdata[size] = (char *)malloc(size * sizeof(char));
 	
 	FILE *fp;
     
@@ -1019,7 +1027,7 @@ void admin_course_read(){                //to read all the new courses
 	FILE *fp;
 	fp = fopen("new_course.txt", "r");
 	char data[size];
-	int y = 12;
+	int y = 10;
 	while(fgets(data, size, fp)){
 		gotoxy(22,y);
 		printf("%s", data);
@@ -1075,7 +1083,6 @@ void teacher_pass(){
 			}
 	    }
 }
-
 fclose(fp);
 }
 
@@ -1662,4 +1669,3 @@ void student(char name[],int var,char id[]){
    free(ip);
    fclose(pr);
 }
-
