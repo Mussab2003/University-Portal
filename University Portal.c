@@ -1347,29 +1347,6 @@ void add_attendance(){
     gotoxy(22, 13);
     printf("Enter the total no. days attended by student /90: ");
     scanf("%d",&days);
-    if(days>90)
-    {
-    	gotoxy(22, 15);
-    	printf("Input days are greater than 90.");
-        gotoxy(22, 16);
-    	printf("Press 1 to Enter Input Again");
-    	gotoxy(22, 17);
-		printf("Press 0 to Exit");
-		int choice;
-		gotoxy(22, 19);
-		printf("Enter choice: ");
-		scanf("%d", &choice);
-		switch(choice){
-			case 1:
-				system("CLS");
-				add_attendance();
-				break;
-				
-			case 0:
-				system("CLS");
-				break;
-		}
-	}
     int percent= (days/90.0)*100.0;
     fprintf(fp,"Attendance Percentage: %d %",percent);
     system("CLS");
@@ -1692,3 +1669,4 @@ void student(char name[],int var,char id[]){
    free(ip);
    fclose(pr);
 }
+
