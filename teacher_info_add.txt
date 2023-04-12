@@ -1,0 +1,50 @@
+Teacher's Name: usama antuley
+Total No of courses: 1
+Course 1 name: calculus
+Salary: 450000
+Password: usama
+
+Teacher's Name: muhammad shahzad
+Total No of courses: 1
+Course 1 name: programming fundamental
+Salary: 500000
+Password: shahzad
+
+Teacher's Name: muhammad rameez
+Total No of courses: 1
+Course 1 name: applied physics
+Salary: 100000
+Password: rameez
+
+Teacher's Name: shayan noor
+Total No of courses: 1
+Course 1 name: information and communication technology
+Salary: 50000
+Password: shayan
+
+Teacher's Name: romasha
+Total No of courses: 1
+Course 1 name: programming fundamental lab
+Salary: 300000
+Password: romasha
+
+Teacher's Name: javeria ali
+Total No of courses: 1
+Course 1 name: english composition and comprehension lab
+Salary: 150000
+Password: javeria
+
+Teacher's Name: atifa batool
+Total No of courses: 1
+Course 1 name: english composition and comprehension
+Salary: 200000
+Password: atifa
+
+Teacher's Name: bahraj khan
+Total No of courses: 1
+Course 1 name: artificial intelligence
+Salary: 300000
+Password: bahraj
+
+
+

@@ -1,0 +1,189 @@
+
+ID: 22k-4283
+Student's Name: taha imran
+Department: bscs
+Semester: 1
+Section: B
+Password: taha
+Fees Status: paid
+Phone: 627862738788
+
+ID: 22k-4285
+Student's Name: shariq nadeem
+Department: bscs
+Semester: 1
+Section: B
+Password: shariq
+Fees Status: paid
+Phone: 382372357347
+
+ID: 22k-4146
+Student's Name: muhammad mussab
+Department: bscs
+Semester: 1
+Section: B
+Password: mussab
+Fees Status: paid
+Phone: 32878207138
+
+ID: 22k-4282
+Student's Name: daniyal fahim
+Department: bscs
+Semester: 1
+Section: B
+Password: daniyal
+Fees Status: paid
+Phone: 763223233434
+
+ID: 22k-4258
+Student's Name: ilyas moiz
+Department: bscs
+Semester: 1
+Section: B
+Password: ilyas
+Fees Status: not paid
+Phone: 321784671266
+
+ID: 21k-4546
+Student's Name: taha shah
+Department: bscs
+Semester: 3
+Section: D
+Password: taha
+Fees Status: paid
+Phone: 35523178549
+
+ID: 22k-4167
+Student's Name: arafat khan
+Department: bscs
+Semester: 1
+Section: B
+Password: arafat
+Fees Status: paid
+Phone: 346371547781
+
+ID: 22k-4644
+Student's Name: aryan khan
+Department: bscs
+Semester: 1
+Section: C
+Password: aryan
+Fees Status: not paid
+Phone: 34523158178
+
+ID: 22k-5612
+Student's Name: huzaifa farhan
+Department: bsse
+Semester: 1
+Section: A
+Password: huzaifa
+Fees Status: paid
+Phone: 31261237531
+
+ID: 22k-4641
+Student's Name: muhammad raza
+Department: bscs
+Semester: 1
+Section: B
+Password: raza
+Fees Status: paid
+Phone: 34272535378
+
+ID: 22k-4665
+Student's Name: daniyal saeed
+Department: bscs
+Semester: 1
+Section: B
+Password: dani
+Fees Status: not paid
+Phone: 3452367136
+
+ID: 22k-6166
+Student's Name: saad ali
+Department: bscs
+Semester: 1
+Section: B
+Password: saad
+Fees Status: paid
+Phone: 36626325612
+
+ID: 21k-2944
+Student's Name: anas khan
+Department: bscys
+Semester: 3
+Section: C
+Password: anas
+Fees Status: paid
+Phone: 3242155126
+
+ID: 21k-6146
+Student's Name: fawaz ahmad
+Department: bsai
+Semester: 3
+Section: B
+Password: fawaz
+Fees Status: paid
+Phone: 32167365236
+
+ID: 22k-3465
+Student's Name: nabeel ali
+Department: bsse
+Semester: 1
+Section: A
+Password: nabeel
+Fees Status: paid
+Phone: 1465621356
+
+ID: 22k-3884
+Student's Name: ibtisam khan
+Department: bsse
+Semester: 1
+Section: B
+Password: ibtisam
+Fees Status: paid
+Phone: 23167563456
+
+ID: 22k-6155
+Student's Name: yahya khan
+Department: bsai
+Semester: 1
+Section: A
+Password: yahya
+Fees Status: not paid
+Phone: 3665324523
+
+ID: 22k-3146
+Student's Name: muhammad hassan
+Department: bscys
+Semester: 1
+Section: A
+Password: hassan
+Fees Status: paid
+Phone: 3645766532
+
+ID: 22k-1234
+Student's Name: murtaza ali
+Department: bsai
+Semester: 1
+Section: C
+Password: murtaza
+Fees Status: not paid
+Phone: 3214576557
+
+ID: 19k-6655
+Student's Name: aimal khan
+Department: bscs
+Semester: 7
+Section: C
+Password: aimal
+Fees Status: paid
+Phone: 3226754876
+
+ID: 22k-1234
+Student's Name: Amna
+Department: CS
+Semester: 1
+Section: B
+Password: amna
+Fee Status: paid
+Phone: 333290929

@@ -1,0 +1,15 @@
+Periods            1              2                3              4
+
+Timings     8:00-10:00AM    10:00-12:00AM    12:00-2:00PM   2:00-4:00PM
+
+Class        AP BCS-1D       PF BCS-1D       ICT LAB BCS-1A ECC BCS-1D
+Schedule     RABIA           MUSAWAR         SHAYAN NOOR    ATIFA BATOOL
+
+	     AP BCS-1F       CAL BCS-1C      IRS BCS-1B     AP BCS-1B
+	     M RAMEEZ        NADEEM KHAN     HASSAN SAEED   M RAMEEZ
+    	     
+	     CAL BCS-1A      AP BCS-1E       CAL BCS-1F     AP BCS-1K
+             UROOJ           RABIA           USAMA ANTULEY  RABIA
+
+	     IRS BCS-1A      PF LAB BCS-1K   PF BCS-1A      ECC LAB BCS-1D
+	     DR SHAHZAD      ROMASHA         DR FAROOQUE    JAVERIA

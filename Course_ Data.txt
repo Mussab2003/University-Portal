@@ -1,0 +1,94 @@
+Semester 1
+Introduction to ICT
+Programming Fundamentals
+Applied Physics
+Calculus & Analytical Geometry
+Pakistan Studies
+English Composition & Comprehension
+Linear Circuit Analysis
+Applied Calculus
+English Language
+
+Semester 2
+Object Oriented Programming
+Digital Logic Design
+Differential Equations
+Islamic Studies/Ethics
+Communication & Presentation Skills
+Introduction to Software Engineering
+Electrical Network Analysis
+Engineering Mechanics-I (Statics)
+Computer Aided Design
+
+Semester 3
+Data Structures
+Computer Org. and Assembly Language
+Discrete Structures
+Linear Algebra
+Software Requirements Engineering
+Human Computer Interaction
+Networks & Cyber Security-I
+Programming for AI
+Applied Electronics
+Engineering Mechanics-II (Dynamics)
+
+Semester 4
+Database Systems
+Operating Systems
+Design & Analysis of Algorithms
+Probability & Statistics
+Software Design & Architecture
+Digital Forensics
+Fundamentals of Software Engineering
+Introduction to Robotics
+Electrical Machines
+Complex Variables & Transforms
+Robotics Design Lab - II (Arduino-based)
+
+Semester 5
+Theory of Automata
+Computer Networks
+Software Design and Analysis
+Technical & Business Writing
+Numerical Computing
+Software Construction & Development
+Software Quality Engineering
+Machine Learning
+Knowledge Representation & Reasoning
+Signal Processing
+Probability & Random Processes
+Hydraulic & Pneumatic Actuators
+Communication and Presentation Skills
+	
+Semester 6
+Software Engineering
+Parallel & Distributed Computing
+Artificial Intelligence
+Web Engineering
+Design and Analysis of Algorithms
+Vulnerability Assessment & Reverse Engineering	
+Networks & Cyber Security-II
+Artificial Neural Networks
+Feedback Control System	
+Embedded Systems
+Sensors & Transducers
+Robotics Machine Design
+Technical & Business Writing
+Robotics Design Lab-III (Modular Design)
+
+Semester 7
+Final Year Project-I
+Information Security
+Professional Practices
+Fund. of Software Project Management
+Information Assurance
+Secure Software Design
+Computer Vision
+Fundamentals of Natural Language Processing
+Model Predictive Control
+Engineering Economics & Management
+
+Semester 8
+Final Year Project-II
+Software Re-Engineering
+Entrepreneurship

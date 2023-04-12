@@ -1,0 +1,90 @@
+ID: 22k-4282
+Student's Name: daniyal fahim
+Department: bscs
+Semester: 1
+Section: B
+Password: daniyal
+Fees Status: paid
+Assignmnet: 8.0
+Quizzes: 7.0
+Mid1: 10.0
+Mid2: 12.0
+Final: 32.0
+GPA: 2.33
+
+
+ID: 22k-4283
+Student's Name: taha imran
+Department: bscs
+Semester: 1
+Section: B
+Password: taha
+Fees Status: paid
+Assignmnet: 8.0
+Quizzes: 7.0
+Mid1: 12.0
+Mid2: 14.0
+Final: 40.0
+GPA: 3.33
+
+
+ID: 22k-4146
+Student's Name: muhammad mussab
+Department: bscs
+Semester: 1
+Section: B
+Password: mussab
+Fees Status: paid
+Assignmnet: 9.0
+Quizzes: 5.0
+Mid1: 10.0
+Mid2: 11.0
+Final: 40.0
+GPA: 3.00
+
+
+ID: 22k-4258
+Student's Name: ilyas moiz
+Department: bscs
+Semester: 1
+Section: B
+Password: ilyas
+Fees Status: not paid
+Assignmnet: 9.0
+Quizzes: 5.0
+Mid1: 6.0
+Mid2: 10.0
+Final: 15.0
+GPA: 0.00
+
+
+ID: 22k-4285
+Student's Name: shariq nadeem
+Department: bscs
+Semester: 1
+Section: B
+Password: shariq
+Fees Status: paid
+Assignmnet: 9.0
+Quizzes: 10.0
+Mid1: 10.0
+Mid2: 9.0
+Final: 35.0
+GPA: 2.67
+
+
+ID: 21k-4546
+Student's Name: taha shah
+Department: bscs
+Semester: 3
+Section: D
+Password: taha
+Fees Status: paid
+Assignmnet: 5.0
+Quizzes: 5.0
+Mid1: 10.0
+Mid2: 10.0
+Final: 30.0
+GPA: 1.67
+
+

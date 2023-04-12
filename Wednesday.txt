@@ -1,0 +1,15 @@
+Periods            1              2                3              4
+
+Timings     8:00-10:00AM    10:00-12:00AM    12:00-2:00PM   2:00-4:00PM
+
+Class        PF BCS-1A       PF BCS-1B       AP BCS-1B      IRS BCS-1F
+Schedule     DR FAROOQUE     M SHAHZAD       M RAMEEZ       DR SHAHZAD
+
+	     PF BCS-1F       CAL BCS-1K      IRS BCS-1A     AP BCS-1C
+	     M SHAHZAD       UROOJ           DR SHAHZAD     M RAMEEZ
+    	     
+	     CAL BCS-1B      AP BCS-1A       CAL BCS-1D     LAB ECC BCS-1B
+             USAMA ANTULEY    M RAMEEZ      NADEEM KHAN    JAVERIA
+
+	     IRS BCS-1E      ECC BCS-1C      PF LAB BCS-1C  CAL BCS-1F
+	     HASSAN SAEED    ATIFA BATOOL    ROMASHA        USAMA ANTULEY
